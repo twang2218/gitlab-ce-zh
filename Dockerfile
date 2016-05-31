@@ -8,4 +8,8 @@ RUN echo "" \
     && cd gitlab \
     && git diff origin/8-8-stable..origin/8-8-zh > ../8.8.diff \
     && echo "# Patching" \
-    && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../8.8.diff
+    && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../8.8.diff \
+    && echo "# Cleaning" \
+    && cd .. \
+    && rm -rf gitlab \
+    && rm *.diff
