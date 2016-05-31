@@ -31,6 +31,17 @@ volumes:
     logs: {}
 ```
 
+第一次启动 GitLab 后，使用下列默认用户和密码登录，并修改密码：
+
+```
+用户名: `root`
+密码: `5iveL!fe`
+```
+
+GitLab Docker 相关操作请参考：
+
+http://docs.gitlab.com/omnibus/docker/
+
 # GitLab Community Edition - Chinese Edition
 
 This is GitLab Community Edition docker image with Chinese translation integrated. The Docker image is based on [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/), and the Chinese translation is based on Larry Li's work [https://gitlab.com/larryli/gitlab]().
