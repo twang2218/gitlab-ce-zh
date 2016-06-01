@@ -6,9 +6,9 @@ RUN echo "" \
     && git clone https://gitlab.com/larryli/gitlab.git \
     && echo "# Generating translation patch" \
     && cd gitlab \
-    && git diff origin/8-8-stable..origin/8-8-zh > ../8.8.diff \
+    && git diff origin/8-8-stable..origin/8-8-zh > ../zh_CN.diff \
     && echo "# Patching" \
-    && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../8.8.diff \
+    && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo "# Cleaning" \
     && cd .. \
     && rm -rf gitlab \
