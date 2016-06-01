@@ -1,8 +1,10 @@
 # GitLab 中文社区版
 
-这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化[https://gitlab.com/larryli/gitlab]() 而制作。
+这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 Docker Image  [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化[https://gitlab.com/larryli/gitlab]() 而制作。
 
 # 使用
+
+## 使用 Docker Compose
 
 可以使用 Docker Compose 来配置启动，建立一个 `docker-compose.yml`，内容如下：
 
@@ -31,12 +33,32 @@ volumes:
     logs: {}
 ```
 
+然后使用命令 `docker-compose up -d` 来启动。
+
+## 使用 Docker 命令启动
+
+```bash
+docker run --detach \
+    --hostname gitlab.example.com \
+    --publish 443:443 --publish 80:80 --publish 22:22 \
+    --name gitlab \
+    --restart always \
+    --volume /srv/gitlab/config:/etc/gitlab \
+    --volume /srv/gitlab/logs:/var/log/gitlab \
+    --volume /srv/gitlab/data:/var/opt/gitlab \
+    twang2218/gitlab-ce-zh:latest
+```
+
+# 登录
+
 第一次启动 GitLab 后，使用下列默认用户和密码登录，并修改密码：
 
 ```
 用户名: `root`
 密码: `5iveL!fe`
 ```
+
+# 相关信息
 
 GitLab Docker 相关操作请参考：
 
