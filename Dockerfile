@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:8.8.3-ce.0
+FROM gitlab/gitlab-ce:8.8.4-ce.0
 MAINTAINER Tao Wang <twang2218@gmail.com>
 
 RUN echo "" \
