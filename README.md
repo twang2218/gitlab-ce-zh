@@ -64,7 +64,7 @@ docker run --detach \
 
 第一次启动 GitLab 后，使用下列默认用户和密码登录，并修改密码：
 
-```
+```bash
 用户名: `root`
 密码: `5iveL!fe`
 ```
@@ -73,7 +73,7 @@ docker run --detach \
 
 GitLab Docker 相关操作请参考：
 
-http://docs.gitlab.com/omnibus/docker/
+<http://docs.gitlab.com/omnibus/docker/>
 
 # GitLab Community Edition - Chinese Edition
 
