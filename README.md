@@ -1,15 +1,14 @@
 # 支持的 tags 和对应的 `Dockerfile`
 
- - [8.1](https://github.com/twang2218/gitlab-ce-zh/blob/v8.1/Dockerfile)
- - [8.7](https://github.com/twang2218/gitlab-ce-zh/blob/v8.7/Dockerfile)
- - [8.8](https://github.com/twang2218/gitlab-ce-zh/blob/v8.8/Dockerfile)
- - [latest](https://github.com/twang2218/gitlab-ce-zh/blob/master/Dockerfile)
+ - [`8.1`, `8.1.4` (*Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/v8.1/Dockerfile)
+ - [`8.7`, `8.7.6` (*Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/v8.7/Dockerfile)
+ - [`latest`, `8.8`, `8.8.5` (*Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/v8.8/Dockerfile)
 
-[![](https://imagelayers.io/badge/twang2218/gitlab-ce-zh:latest.svg)](https://imagelayers.io/?images=twang2218/gitlab-ce-zh:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh "Get your own image badge on microbadger.com")
 
 # GitLab 中文社区版
 
-这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 Docker Image  [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化[https://gitlab.com/larryli/gitlab]() 而制作。
+这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 Docker Image  [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> 而制作。
 
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh)
 
