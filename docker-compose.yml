@@ -13,7 +13,7 @@ services:
       volumes:
         - config:/mnt/disk1/gitlab/config/
         - data:/mnt/disk1/gitlab/data/
-        - logs:/mnt/disk1/gitlab/log/
+        - logs:/mnt/disk1/gitlab/logs/
 volumes:
     config: {}
     data: {}
