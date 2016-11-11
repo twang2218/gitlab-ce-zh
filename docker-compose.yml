@@ -1,21 +1,19 @@
 version: '2'
 services:
     web:
-      image: 'twang2218/gitlab-ce-zh:latest'
+      image: 'maikebing/gitlab-ce-zh:latest'
       restart: always
-      hostname: 'gitlab.example.com'
+      hostname: 'gitclub.cn'
       environment:
         GITLAB_OMNIBUS_CONFIG: |
-          external_url 'http://gitlab.example.com'
+          external_url 'https://gitclub.cn/
           # Add any other gitlab.rb configuration here, each on its own line
       ports:
-        - '80:80'
-        - '443:443'
         - '22:22'
       volumes:
-        - config:/etc/gitlab
-        - data:/var/opt/gitlab
-        - logs:/var/log/gitlab
+        - config:/mnt/disk1/gitlab/config/
+        - data:/mnt/disk1/gitlab/data/
+        - logs:/mnt/disk1/gitlab/log/
 volumes:
     config: {}
     data: {}
