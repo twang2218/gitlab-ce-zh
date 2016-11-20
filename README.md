@@ -1,8 +1,8 @@
 # 支持的 tags 和对应的 `Dockerfile`
 
-- [`8.8`, `8.8.6`, `latest` (*8.8/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.8/Dockerfile)
-- [`8.9`, `8.9.11`, `latest` (*8.9/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.9/Dockerfile)
-- [`8.12`, `8.12.9`, `latest` (*8.12/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.12/Dockerfile)
+- [`8.8`, `8.8.6` (*8.8/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.8/Dockerfile)
+- [`8.9`, `8.9.11` (*8.9/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.9/Dockerfile)
+- [`8.12`, `8.12.9` (*8.12/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.12/Dockerfile)
 - [`8.13`, `8.13.6`, `latest` (*8.13/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.13/Dockerfile)
 
 [![](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh "Get your own image badge on microbadger.com")
@@ -39,9 +39,9 @@ services:
         - data:/var/opt/gitlab
         - logs:/var/log/gitlab
 volumes:
-    config: {}
-    data: {}
-    logs: {}
+    config:
+    data:
+    logs:
 ```
 
 然后使用命令 `docker-compose up -d` 来启动。
