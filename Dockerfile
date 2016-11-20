@@ -1,14 +1,13 @@
-FROM gitlab/gitlab-ce:8.8.6-ce.1
+FROM gitlab/gitlab-ce:8.13.6-ce.0
 MAINTAINER Tao Wang <twang2218@gmail.com>
 
 RUN echo "" \
-    && echo "# git clone https://gitlab.com/larryli/gitlab.git" \
-    && git clone https://gitlab.com/larryli/gitlab.git \
+    && echo "# git clonehttps://gitlab.com/xhang/gitlab.git" \
+    && git clone --progress --branch 8-13-6-zh  \
     && echo "# Generating translation patch" \
     && cd gitlab \
-    && git diff origin/8-8-stable..origin/8-8-zh > ../zh_CN.diff \
     && echo "# Patching" \
-    && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
+    && cp ./*  /opt/gitlab/embedded/service/gitlab-rails  -R \
     && echo "# Cleaning" \
     && cd .. \
     && rm -rf gitlab \
