@@ -2,7 +2,7 @@ FROM gitlab/gitlab-ce:8.13.6-ce.0
 MAINTAINER MaiKeBing github.cn
 
 RUN echo "" \
-    && echo "# git clonehttps://gitlab.com/xhang/gitlab.git" \
+    && echo "# git clone https://gitlab.com/xhang/gitlab.git" \
     && git clone --progress --branch 8-13-6-zh  \
     && echo "# Generating translation patch" \
     && cd gitlab \
