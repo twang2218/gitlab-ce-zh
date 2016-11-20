@@ -44,30 +44,65 @@ volumes:
     logs:
 ```
 
-然后使用命令 `docker-compose up -d` 来启动。
+然后使用命令 `docker-compose up -d` 来启动，停止服务使用 `docker-compose down`。
 
-## 使用 Docker 命令启动
+实验时，可以直接修改 `/etc/hosts` 添加 Docker Host 的主机 IP 以及域名，方便测试。比如，对于 Docker for Mac 环境来说，可以直接在 `/etc/hosts` 添加下面这一行：
 
 ```bash
-docker run --detach \
+127.0.0.1   gitlab.example.com
+```
+
+## 直接使用 Docker 命令启动
+
+直接使用 `docker` 命令要比使用 `docker-compose` 繁琐一些，但是可以达到一样的效果。
+
+首先，Docker 容器数据应该存储于卷中，在这里我们使用最简单的本地命名卷，因此我们先来创建命名卷。
+
+```bash
+docker volume create --name gitlab-config
+docker volume create --name gitlab-data
+docker volume create --name gitlab-logs
+```
+
+然后我们需要创建自定义网络，从而让容器运行于独立的网络中，区别于默认网桥。
+
+```bash
+docker network create gitlab-net
+```
+
+准备好后，开始运行 Gitlab 容器：
+
+```bash
+docker run -d \
     --hostname gitlab.example.com \
-    --publish 443:443 --publish 80:80 --publish 22:22 \
+    -p 80:80 \
+    -p 443:443 \
+    -p 22:22 \
     --name gitlab \
-    --restart always \
-    --volume /srv/gitlab/config:/etc/gitlab \
-    --volume /srv/gitlab/logs:/var/log/gitlab \
-    --volume /srv/gitlab/data:/var/opt/gitlab \
+    --restart unless-stopped \
+    -v gitlab-config:/etc/gitlab \
+    -v gitlab-logs:/var/log/gitlab \
+    -v gitlab-data:/var/opt/gitlab \
+    --network gitlab-net \
     twang2218/gitlab-ce-zh:latest
+```
+
+如需停止服务，直接运行 `docker stop gitlab`。
+
+如需卸载服务及相关内容，可以执行：
+
+```bash
+docker stop gitlab
+docker rm gitlab
+docker network rm gitlab-net
+docker volume rm gitlab-config
+docker volume rm gitlab-data
+docker volume rm gitlab-logs
 ```
 
 # 登录
 
-第一次启动 GitLab 后，使用下列默认用户和密码登录，并修改密码：
-
-```bash
-用户名: `root`
-密码: `5iveL!fe`
-```
+启动 GitLab 后，第一次访问时，会要求设置 `root` 用户的密码，密码不得小于8位。设置好后，就可以登录使用了。
 
 # 相关信息
 
