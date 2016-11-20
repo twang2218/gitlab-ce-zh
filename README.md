@@ -9,7 +9,7 @@
 
 # GitLab 中文社区版
 
-这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 Docker Image  [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> 而制作。
+这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 Docker Image  [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> 和 谢航 的汉化 <https://gitlab.com/xhang/gitlab> 而制作。
 
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh)
 
@@ -77,4 +77,4 @@ GitLab Docker 相关操作请参考：
 
 # GitLab Community Edition - Chinese Edition
 
-This is GitLab Community Edition docker image with Chinese translation integrated. The Docker image is based on [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/), and the Chinese translation is based on Larry Li's work [https://gitlab.com/larryli/gitlab]().
+This is GitLab Community Edition docker image with Chinese translation integrated. The Docker image is based on [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/), and the Chinese translation is based on Larry Li's work <https://gitlab.com/larryli/gitlab> and Xie Hang's work <https://gitlab.com/xhang/gitlab>.
