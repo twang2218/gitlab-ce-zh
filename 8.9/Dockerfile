@@ -5,7 +5,7 @@ RUN set -xe \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && echo " # Generating translation patch" \
     && cd gitlab \
-    && git remote add upstream https://gitlab.com/gitlab-org/gitlab-ce \
+    && git remote add upstream https://gitlab.com/gitlab-org/gitlab-ce.git \
     && git fetch upstream 8-9-stable \
     && git diff upstream/8-9-stable..origin/8-9-zh > ../zh_CN.diff \
     && echo " # Patching" \
