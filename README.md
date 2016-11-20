@@ -1,9 +1,7 @@
 # 支持的 tags 和对应的 `Dockerfile`
 
-- [`8.5`, `8.5.8` (*8.5/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/9d86cefb639415d0109e8e40c7f0e867b62af7dc/8.5/Dockerfile)
-- [`8.6`, `8.6.7` (*8.6/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/9d86cefb639415d0109e8e40c7f0e867b62af7dc/8.6/Dockerfile)
-- [`8.7`, `8.7.6` (*8.7/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/9d86cefb639415d0109e8e40c7f0e867b62af7dc/8.7/Dockerfile)
-- [`8.8`, `8.8.6`, `latest` (*8.8/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/9d86cefb639415d0109e8e40c7f0e867b62af7dc/8.8/Dockerfile)
+- [`8.8`, `8.8.6`, `latest` (*8.8/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.8/Dockerfile)
+- [`8.9`, `8.9.11`, `latest` (*8.9/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.9/Dockerfile)
 
 [![](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh "Get your own image badge on microbadger.com")
 
