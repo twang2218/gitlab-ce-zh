@@ -22,9 +22,9 @@
 ```yml
 version: '2'
 services:
-    web:
+    gitlab:
       image: 'twang2218/gitlab-ce-zh:latest'
-      restart: always
+      restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
         GITLAB_OMNIBUS_CONFIG: |
