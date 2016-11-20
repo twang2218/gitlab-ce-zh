@@ -10,5 +10,4 @@ RUN echo "" \
     && cp ./*  /opt/gitlab/embedded/service/gitlab-rails  -R \
     && echo "# Cleaning" \
     && cd .. \
-    && rm -rf gitlab \
-    && rm *.diff
+    && rm -rf gitlab 
