@@ -29,7 +29,7 @@
 version: '2'
 services:
     web:
-      image: 'twang2218/gitlab-ce-zh:latest'
+      image: 'maikebing/gitlab-ce-zh:latest'
       restart: always
       hostname: 'gitlab.example.com'
       environment:
