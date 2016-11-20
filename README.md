@@ -10,10 +10,13 @@
 # GitLab 中文社区版
 
 这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 Docker Image  [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/)
-  -  8.8 之前是 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> 而制作。
-  -  8.13 是marbleqi 的汉化  <https://github.com/marbleqi/gitlab-ce-zh> 
 
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh)
+  -  8.8 之前是 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> 而制作。
+  -  8.13 是marbleqi 的汉化  <https://github.com/marbleqi/gitlab-ce-zh> 
+
+ ##  阿里云 镜像：https://cr.console.aliyun.com/#/imageDesc/17510/detail
+ 
+ ##  [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/maikebing/gitlab-ce-zh)
 
 # 使用
 
