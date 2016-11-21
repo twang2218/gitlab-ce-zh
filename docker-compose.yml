@@ -1,8 +1,9 @@
 version: '2'
 services:
-    web:
+    gitlab:
       image: 'maikebing/gitlab-ce-zh:latest'
-      restart: always
+      restart: unless-stopped
+      hostname: 'gitlab.example.com'
       hostname: 'gitclub.cn'
       environment:
         GITLAB_OMNIBUS_CONFIG: |
@@ -15,6 +16,6 @@ services:
         - data:/mnt/disk1/gitlab/data/
         - logs:/mnt/disk1/gitlab/logs/
 volumes:
-    config: {}
-    data: {}
-    logs: {}
+    config:
+    data:
+    logs:
