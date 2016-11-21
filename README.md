@@ -1,17 +1,29 @@
 # 支持的 tags 和对应的 `Dockerfile`
 
-- [`8.8`, `8.8.6` (*8.8/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.8/Dockerfile)
-- [`8.9`, `8.9.11` (*8.9/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.9/Dockerfile)
-- [`8.12`, `8.12.9` (*8.12/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.12/Dockerfile)
-- [`8.13`, `8.13.6`, `latest` (*8.13/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.13/Dockerfile)
+- [`8.5`, `8.5.8` (*8.5/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/9d86cefb639415d0109e8e40c7f0e867b62af7dc/8.5/Dockerfile)
+- [`8.6`, `8.6.7` (*8.6/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/9d86cefb639415d0109e8e40c7f0e867b62af7dc/8.6/Dockerfile)
+- [`8.7`, `8.7.6` (*8.7/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/9d86cefb639415d0109e8e40c7f0e867b62af7dc/8.7/Dockerfile)
+- [`8.8`, `8.8.6`,  (*8.8/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/9d86cefb639415d0109e8e40c7f0e867b62af7dc/8.8/Dockerfile)
+- [`8.13`, `8.13.5`, `latest` ](https://github.com/maikebing/gitlab-ce-zh/blob/master/8.13/Dockerfile)
 
-[![](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh "Get your own image badge on microbadger.com")
 
 # GitLab 中文社区版
 
+<<<<<<< .mine
+这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 Docker Image  [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/)
+=======
 这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 Docker Image  [`gitlab/gitlab-ce`](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> 和 谢航 的汉化 <https://gitlab.com/xhang/gitlab> 而制作。
+>>>>>>> .theirs
 
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh)
+  -  8.8 之前是 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> 而制作。
+  -  8.13 是marbleqi 的汉化  <https://github.com/marbleqi/gitlab-ce-zh>  。
+
+###   阿里云 镜像：https://cr.console.aliyun.com/#/imageDesc/17510/detail
+###  Docker  官方 ： maikebing/gitlab-ce-zh  https://hub.docker.com/r/maikebing/gitlab-ce-zh/ 
+###  [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/maikebing/gitlab-ce-zh)
+###  [![](https://images.microbadger.com/badges/image/maikebing/gitlab-ce-zh.svg)](https://microbadger.com/images/maikebing/gitlab-ce-zh "Get your own image badge on microbadger.com") 
+###  GitLabQQ 交流群(gitclub.cn) 591597718 
+
 
 # 使用
 
@@ -23,7 +35,7 @@
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:latest'
+      image: 'maikebing/gitlab-ce-zh:latest'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
