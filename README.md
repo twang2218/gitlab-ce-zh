@@ -128,7 +128,7 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 ## `testing` 镜像
 
-`testing` 镜像是为了帮助翻译项目制作的 GitLab 镜像，它使用保持使用最新的翻译结果。
+`testing` 镜像是为了帮助翻译项目制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
 它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `8-14-stable` 分支和 `8-14-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:8.14.0-ce.0` 进行应用汉化结果进行构建的。
 
@@ -137,8 +137,8 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 运行测试镜像和运行其它镜像一样，可以用 `docker-compose` 的方法，也可以用之前最简命令的方法：
 
 ```bash
-$ docker pull twang2218/gitlab-ce-zh:testing
-$ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
+docker pull twang2218/gitlab-ce-zh:testing
+docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 ```
 
 需要注意的是，这里的 `docker pull` 是必须的，因为 `testing` 镜像构建比较频繁，需要确保本地镜像是最新的镜像。如果是 `docker-compose`，则执行 `docker-compose pull` 来或取最新镜像。
