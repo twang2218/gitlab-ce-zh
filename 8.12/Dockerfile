@@ -1,11 +1,11 @@
-FROM gitlab/gitlab-ce:8.12.9-ce.0
+FROM gitlab/gitlab-ce:8.12.10-ce.0
 MAINTAINER Tao Wang <twang2218@gmail.com>
 RUN set -xe \
-    && VERSION=v8.12.9 \
+    && VERSION=v8.12.10 \
     && echo " # Generating translation patch ..." \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff ${VERSION}..${VERSION}.zh > ../zh_CN.diff \
+    && git diff ${VERSION}..${VERSION}-zh > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Cleaning ..." \

@@ -1,7 +1,7 @@
-FROM gitlab/gitlab-ce:8.13.6-ce.0
+FROM gitlab/gitlab-ce:8.13.7-ce.0
 MAINTAINER Tao Wang <twang2218@gmail.com>
 RUN set -xe \
-    && VERSION=v8.13.6 \
+    && VERSION=v8.13.7 \
     && echo " # Generating translation patch ..." \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
