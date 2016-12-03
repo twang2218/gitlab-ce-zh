@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:8.14.1-ce.0
+FROM gitlab/gitlab-ce:8.14.1-ce.1
 MAINTAINER Tao Wang <twang2218@gmail.com>
 RUN set -xe \
     && VERSION=v8.14.1 \
