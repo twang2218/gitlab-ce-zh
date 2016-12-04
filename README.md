@@ -5,8 +5,8 @@
 - [`8.10`, `8.10.13` (*8.10/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.10/Dockerfile)
 - [`8.11`, `8.11.11` (*8.11/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.11/Dockerfile)
 - [`8.12`, `8.12.10` (*8.12/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.12/Dockerfile)
-- [`8.13`, `8.13.7`, `latest` (*8.13/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.13/Dockerfile)
-- [`8.14`, `8.14.2` (*8.14/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.14/Dockerfile)
+- [`8.13`, `8.13.7` (*8.13/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.13/Dockerfile)
+- [`8.14`, `8.14.2`, `latest` (*8.14/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.14/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
 [![](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh "Get your own image badge on microbadger.com")
