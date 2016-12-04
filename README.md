@@ -143,11 +143,37 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 需要注意的是，这里的 `docker pull` 是必须的，因为 `testing` 镜像构建比较频繁，需要确保本地镜像是最新的镜像。如果是 `docker-compose`，则执行 `docker-compose pull` 来或取最新镜像。
 
-## 登录
+## 注意事项
+
+### 登录
 
 启动 GitLab 后，第一次访问时，会要求设置 `root` 用户的密码，密码不得小于8位。设置好后，就可以登录使用了。
 
 对于早期版本，可以使用默认的 `root` 用户密码 `5iveL!fe` 登录。
+
+### 配置 SSH 端口
+
+这里运行示例中，无论是使用 `docker-compose.yml` 还是 `docker run` 都使用的是 SSH 默认端口 `22` 去映射容器 SSH 端口。其目的是希望比较自然的使用类似 `git@gitlab.example.com:myuser/awesome-project.git` 的形式来访问服务器版本库。但是，宿主服务器上默认的 SSH 服务也是使用的 22 端口。因此默认会产生端口冲突。
+
+#### 修改宿主的 SSH 端口
+
+修改宿主的 SSH 端口，使用非 `22` 端口。比如修改 SSHD 配置文件，`/etc/ssh/sshd_config`，将其中的 `Port 22` 改为其它端口号，然后 `service sshd restart`。这种方式比较推荐，因为管理用的宿主 SSH 端口改成别的其实更安全。
+
+#### 修改容器的 SSH 端口
+
+修改容器的端口映射关系，比如将 `-p 22:22` 改为 `-p 2222:22`，这样 GitLab 的 SSH 服务端口将是 `2222`。这样做会让使用 GitLab 的 SSH 克隆、提交代码有些障碍。这种情况要改变用户使用 Git 的链接方式。
+
+要从之前的：
+
+```bash
+git clone git@gitlab.example.com:myuser/awesome-project.git
+```
+
+改为明确使用 `ssh://` 的 URL 方式。
+
+```bash
+git clone ssh://git@gitlab.example.com:2222/myuser/awesome-project.git
+```
 
 # 相关信息
 
