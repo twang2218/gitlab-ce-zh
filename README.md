@@ -24,10 +24,10 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 twang2218/gitlab-ce-zh:8.14.0
+docker run -d -p 3000:80 twang2218/gitlab-ce-zh:8.14.2
 ```
 
-*可以将 `8.14.0` 换成你所需要的版本标签。*
+*可以将 `8.14.2` 换成你所需要的版本标签。*
 
 启动后就可以通过主机的 `3000` 端口看到运行结果了，比如用的是本机 Docker 的话，访问：<http://localhost:3000> 即可。
 
@@ -47,7 +47,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:8.14.0'
+      image: 'twang2218/gitlab-ce-zh:8.14.2'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -112,7 +112,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    twang2218/gitlab-ce-zh:8.14.0
+    twang2218/gitlab-ce-zh:8.14.2
 ```
 
 如需停止服务，直接运行 `docker stop gitlab`。
