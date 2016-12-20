@@ -25,10 +25,10 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 twang2218/gitlab-ce-zh:8.14.2
+docker run -d -p 3000:80 twang2218/gitlab-ce-zh:8.14.5
 ```
 
-*可以将 `8.14.2` 换成你所需要的版本标签。*
+*可以将 `8.14.5` 换成你所需要的版本标签。*
 
 启动后就可以通过主机的 `3000` 端口看到运行结果了，比如用的是本机 Docker 的话，访问：<http://localhost:3000> 即可。
 
@@ -48,7 +48,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:8.14.2'
+      image: 'twang2218/gitlab-ce-zh:8.14.5'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -113,7 +113,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    twang2218/gitlab-ce-zh:8.14.2
+    twang2218/gitlab-ce-zh:8.14.5
 ```
 
 如需停止服务，直接运行 `docker stop gitlab`。
@@ -131,9 +131,9 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 `testing` 镜像是为了帮助翻译项目制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
-它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.14.2` 标签和 `8-14-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:8.14.2-ce.0` 进行应用汉化结果进行构建的。
+它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.15.0-rc1` 标签和 `8-15-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:v8.15.0-rc1` 进行应用汉化结果进行构建的。
 
-测试镜像将会在 [`8-14-stable-zh` 分支](https://gitlab.com/xhang/gitlab/commits/8-14-stable-zh) 发生改变后 10 分钟内进行镜像构建，从而确保最新的翻译改变可以反映到测试镜像中，方便测试翻译结果。
+测试镜像将会在 [`8-15-stable-zh` 分支](https://gitlab.com/xhang/gitlab/commits/8-15-stable-zh) 发生改变后 10 分钟内进行镜像构建，从而确保最新的翻译改变可以反映到测试镜像中，方便测试翻译结果。
 
 运行测试镜像和运行其它镜像一样，可以用 `docker-compose` 的方法，也可以用之前最简命令的方法：
 
