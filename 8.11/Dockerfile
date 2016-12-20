@@ -1,5 +1,4 @@
 FROM gitlab/gitlab-ce:8.11.11-ce.0
-MAINTAINER Tao Wang <twang2218@gmail.com>
 
 RUN set -xe \
     && git clone https://gitlab.com/xhang/gitlab.git \

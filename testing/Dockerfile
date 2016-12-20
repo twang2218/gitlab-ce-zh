@@ -1,5 +1,5 @@
 FROM gitlab/gitlab-ce:8.14.2-ce.0
-MAINTAINER Tao Wang <twang2218@gmail.com>
+
 RUN set -xe \
     && echo " # Generating translation patch ..." \
     && git clone https://gitlab.com/xhang/gitlab.git \
