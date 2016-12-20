@@ -1,10 +1,10 @@
-FROM gitlab/gitlab-ce:8.14.2-ce.0
-MAINTAINER Tao Wang <twang2218@gmail.com>
+FROM gitlab/gitlab-ce:8.15.0-rc2.ce.0
+
 RUN set -xe \
     && echo " # Generating translation patch ..." \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff v8.14.2..origin/8-14-stable-zh > ../zh_CN.diff \
+    && git diff v8.15.0-rc2..origin/8-15-stable-zh > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Install missing Gem packages ..." \

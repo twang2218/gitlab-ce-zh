@@ -1,5 +1,4 @@
 FROM gitlab/gitlab-ce:8.8.6-ce.1
-MAINTAINER Tao Wang <twang2218@gmail.com>
 
 RUN echo "" \
     && echo "# git clone https://gitlab.com/larryli/gitlab.git" \

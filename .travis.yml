@@ -1,0 +1,15 @@
+sudo: required
+
+services:
+  - docker
+
+git:
+  depth: 10
+
+script:
+    - basedir=$PWD
+    - cd $basedir/8.12/ && docker build -t twang2218/gitlab-ce-zh:8.12 .
+    - cd $basedir/8.13/ && docker build -t twang2218/gitlab-ce-zh:8.13 .
+    - cd $basedir/8.14/ && docker build -t twang2218/gitlab-ce-zh:8.14 .
+    - cd $basedir/8.15/ && docker build -t twang2218/gitlab-ce-zh:8.15 .
+    - docker images

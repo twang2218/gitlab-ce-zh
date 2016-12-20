@@ -1,5 +1,5 @@
 FROM gitlab/gitlab-ce:8.12.13-ce.0
-MAINTAINER Tao Wang <twang2218@gmail.com>
+
 RUN set -xe \
     && VERSION=v8.12.13 \
     && echo " # Generating translation patch ..." \
