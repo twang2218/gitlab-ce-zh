@@ -178,9 +178,9 @@ git clone ssh://git@gitlab.example.com:2222/myuser/awesome-project.git
 
 # 相关信息
 
-GitLab Docker 相关操作请参考：<http://docs.gitlab.com/omnibus/docker/>
-GitLab 官方英文社区版 Docker 镜像：<https://hub.docker.com/r/gitlab/gitlab-ce/>
-GitLab 官方英文企业版 Docker 镜像：<https://hub.docker.com/r/gitlab/gitlab-ee/>
+* GitLab Docker 相关操作请参考：<http://docs.gitlab.com/omnibus/docker/>
+* GitLab 官方英文社区版 Docker 镜像：<https://hub.docker.com/r/gitlab/gitlab-ce/>
+* GitLab 官方英文企业版 Docker 镜像：<https://hub.docker.com/r/gitlab/gitlab-ee/>
 
 # GitLab Community Edition - Chinese Edition
 
