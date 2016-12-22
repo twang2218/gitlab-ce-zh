@@ -10,13 +10,15 @@
 - [`8.15`, `8.15.0-rc3`, `rc` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
-[![](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh "Get your own image badge on microbadger.com")
+[![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
+[![Image Layers and Size](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh)
+[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh)
 
 # GitLab 中文社区版
 
 这是汉化的 GitLab 社区版 Docker Image，基于官方提供的 Docker Image  [gitlab/gitlab-ce](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> (8.9以前的版本) 和谢航的汉化 <https://gitlab.com/xhang/gitlab> (8.9 以后的版本) 而制作。
 
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh)
+如果碰到汉化问题，欢迎到 <https://gitlab.com/xhang/gitlab/issues> 来提交 Issue 甚至 Merge Request；如果碰到镜像问题，欢迎到 <https://github.com/twang2218/gitlab-ce-zh/issues> 来提交 Issue 或 Pull Request。大家的贡献才能让汉化项目变得更好。如果喜欢本项目，不要忘了加星标啊。 ☺
 
 # 使用
 
