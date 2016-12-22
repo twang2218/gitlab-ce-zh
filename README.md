@@ -7,7 +7,7 @@
 - [`8.12`, `8.12.13` (*8.12/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.12/Dockerfile)
 - [`8.13`, `8.13.10` (*8.13/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.13/Dockerfile)
 - [`8.14`, `8.14.5`, `latest` (*8.14/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.14/Dockerfile)
-- [`8.15`, `8.15.0-rc1`, `rc` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
+- [`8.15`, `8.15.0-rc3`, `rc` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
 [![](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh "Get your own image badge on microbadger.com")
@@ -131,7 +131,7 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 `testing` 镜像是为了帮助翻译项目制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
-它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.15.0-rc2` 标签和 `8-15-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:v8.15.0-rc2.ce.0` 进行应用汉化结果进行构建的。
+它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.15.0-rc3` 标签和 `8-15-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:v8.15.0-rc3.ce.0` 进行应用汉化结果进行构建的。
 
 测试镜像将会在 [`8-15-stable-zh` 分支](https://gitlab.com/xhang/gitlab/commits/8-15-stable-zh) 发生改变后 10 分钟内进行镜像构建，从而确保最新的翻译改变可以反映到测试镜像中，方便测试翻译结果。
 

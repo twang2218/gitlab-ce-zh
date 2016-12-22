@@ -1,7 +1,7 @@
-FROM gitlab/gitlab-ce:8.15.0-rc2.ce.0
+FROM gitlab/gitlab-ce:8.15.0-rc3.ce.0
 
 RUN set -xe \
-    && VERSION=v8.15.0-rc2\
+    && VERSION=v8.15.0-rc3 \
     && echo " # Generating translation patch ..." \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
