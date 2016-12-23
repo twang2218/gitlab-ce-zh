@@ -85,17 +85,13 @@ volumes:
 
 直接使用 `docker` 命令要比使用 `docker-compose` 繁琐一些，但是可以达到一样的效果。
 
-首先，Docker 容器数据应该存储于卷中，在这里我们使用最简单的本地命名卷，因此我们先来创建命名卷。
+首先，Docker 容器数据应该存储于卷中，在这里我们使用最简单的本地命名卷：
 
-```bash
-docker volume create --name gitlab-config
-docker volume create --name gitlab-data
-docker volume create --name gitlab-logs
-```
+* `gitlab-config` 存储 GitLab 配置信息
+* `gitlab-data` 存储数据库
+* `gitlab-logs` 存储日志
 
-顾名思义，`gitlab-config` 存储 GitLab 配置信息；`gitlab-data` 存储数据库；`gitlab-logs` 存储日志。
-
-然后我们需要创建自定义网络，从而让容器运行于独立的网络中，区别于默认网桥。
+然后，我们需要创建自定义网络，从而让容器运行于独立的网络中，区别于默认网桥。
 
 ```bash
 docker network create gitlab-net
@@ -118,6 +114,17 @@ docker run -d \
     twang2218/gitlab-ce-zh:8.14.5
 ```
 
+如果需要进入容器修改配置文件，可以用 `docker exec` 命令进入容器：
+
+```bash
+$ docker exec -it gitlab bash
+root@09f6e32c528c:/# vi /etc/gitlab/gitlab.rb
+root@09f6e32c528c:/# gitlab-ctl reconfigure
+Starting Chef Client, version 12.12.15
+resolving cookbooks for run list: ["gitlab"]
+...
+```
+
 如需停止服务，直接运行 `docker stop gitlab`。
 
 如需卸载服务及相关内容，可以执行：
@@ -133,7 +140,7 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 `testing` 镜像是为了帮助翻译项目制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
-它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.15.0-rc3` 标签和 `8-15-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:v8.15.0-rc3.ce.0` 进行应用汉化结果进行构建的。
+它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.15.0` 标签和 `8-15-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:8.15.0-ce.0` 进行应用汉化结果进行构建的。
 
 测试镜像将会在 [`8-15-stable-zh` 分支](https://gitlab.com/xhang/gitlab/commits/8-15-stable-zh) 发生改变后 10 分钟内进行镜像构建，从而确保最新的翻译改变可以反映到测试镜像中，方便测试翻译结果。
 
