@@ -6,8 +6,8 @@
 - [`8.11`, `8.11.11` (*8.11/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.11/Dockerfile)
 - [`8.12`, `8.12.13` (*8.12/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.12/Dockerfile)
 - [`8.13`, `8.13.10` (*8.13/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.13/Dockerfile)
-- [`8.14`, `8.14.5`, `latest` (*8.14/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.14/Dockerfile)
-- [`8.15`, `8.15.0-rc3`, `rc` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
+- [`8.14`, `8.14.5` (*8.14/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.14/Dockerfile)
+- [`8.15`, `8.15.0`, `latest` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
 [![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
@@ -50,7 +50,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:8.14.5'
+      image: 'twang2218/gitlab-ce-zh:8.15.0'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
