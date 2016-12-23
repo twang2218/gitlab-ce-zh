@@ -12,4 +12,5 @@ script:
     - cd $basedir/8.13/ && docker build -t twang2218/gitlab-ce-zh:8.13 .
     - cd $basedir/8.14/ && docker build -t twang2218/gitlab-ce-zh:8.14 .
     - cd $basedir/8.15/ && docker build -t twang2218/gitlab-ce-zh:8.15 .
+    - cd $basedir/testing/ && docker build -t twang2218/gitlab-ce-zh:testing .
     - docker images
