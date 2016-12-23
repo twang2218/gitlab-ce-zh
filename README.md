@@ -146,6 +146,43 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 需要注意的是，这里的 `docker pull` 是必须的，因为 `testing` 镜像构建比较频繁，需要确保本地镜像是最新的镜像。如果是 `docker-compose`，则执行 `docker-compose pull` 来或取最新镜像。
 
+## `build.sh` 构建脚本
+
+提供了一个脚本可以在不写 `Dockerfile` 的情况下直接生成特定版本、分支的汉化版本镜像。这样方便测试还在开发的分支，或者尚未进入 `twang2218/gitlab-ce-zh` 镜像库的镜像。
+
+脚本含 3 个子命令，分别为 `branch`, `tag` 和 `run`。
+
+### `branch` - 构建某个汉化分支的镜像
+
+格式为：`./build.sh branch <基础镜像标签> <英文版本标签> <汉化版本分支>`
+
+例如：`./build.sh branch 8.15.0-ce.0 v8.15.0 8-15-stable-zh`
+
+这表明将使用 `gitlab/gitlab-ce:8.15.0-ce.0` 做为基础镜像，并且使用上游版本标签 `v8.15.0` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `gitlab-ce-zh:8-15-stable-zh` 的镜像。
+
+### `tag` - 构建某个汉化标签的镜像
+
+格式为：`./build.sh tag <基础镜像标签> <英文版本标签>`
+
+例如： `./build.sh tag 8.15.0-ce.0 v8.15.0`
+
+这表明将使用 `gitlab/gitlab-ce:8.15.0-ce.0` 镜像为基础镜像，以 `v8.15.0` 为基础对比版本，以 `v8.15.0-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `gitlab-ce-zh:v8.15.0-zh` 的镜像。
+
+### `run` - 运行某个构建好的镜像
+
+格式为：`./build.sh <镜像标签>`
+
+例如： `./build.sh run v8.15.0-zh`
+
+这将会以命令 `docker run -d -P gitlab-ce-zh:v8.15.0-zh` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
+
+```bash
+CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                                                  NAMES
+68e03524b2f2        gitlab-ce-zh:8-15-stable-zh   "/assets/wrapper"   3 seconds ago       Up 1 seconds        0.0.0.0:32776->22/tcp, 0.0.0.0:32775->80/tcp, 0.0.0.0:32774->443/tcp   adoring_bartik
+```
+
+从 `docker ps` 的结果可以看出，该运行的容器的 `80` 端口映射到了宿主的 `32775` 端口，因此访问 `http://<主机IP>:32775` 就可以看到运行结果。*初次启动会比较慢，要耐心等待。*
+
 ## 注意事项
 
 ### 登录
