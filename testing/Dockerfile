@@ -1,5 +1,5 @@
 FROM gitlab/gitlab-ce:8.15.1-ce.0
-
+ENV GITLAB_VERSION=8-15-stable-zh
 RUN set -xe \
     && echo " # Generating translation patch ..." \
     && git clone https://gitlab.com/xhang/gitlab.git \

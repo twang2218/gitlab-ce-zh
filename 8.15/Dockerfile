@@ -1,11 +1,10 @@
 FROM gitlab/gitlab-ce:8.15.1-ce.0
-
+ENV GITLAB_VERSION=v8.15.1
 RUN set -xe \
-    && VERSION=v8.15.1 \
     && echo " # Generating translation patch ..." \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff ${VERSION}..${VERSION}-zh > ../zh_CN.diff \
+    && git diff v8.15.1..v8.15.1-zh > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Cleaning ..." \
