@@ -101,8 +101,12 @@ ci() {
         BRANCH="8.${MINOR_VERSION}"
         check_and_build "${BRANCH}" "${TRAVIS_TAG:1}"
     else
-        echo "Not in CI. Let's build latest"
-        check_and_build 8.15 latest
+        echo "Not in CI."
+    fi
+
+    if [[ -n "${DOCKER_TRIGGER_LINK}" ]]; then
+        echo "Triggering the 'latest' build ..."
+        curl -s -H "Content-Type: application/json" --data '{"docker_tag": "latest"}' -X POST "${DOCKER_TRIGGER_LINK}"
     fi
 
     docker images "${DOCKER_USERNAME}/gitlab-ce-zh"
