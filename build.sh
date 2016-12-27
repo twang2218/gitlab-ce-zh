@@ -83,7 +83,7 @@ tag() {
 
     Dockerfile=$(generate_tag_dockerfile ${TAG} ${VERSION})
     echo "$Dockerfile"
-    echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${VERSION}-zh" -
+    echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${VERSION:1}" -
     echo ""
     echo "List of available images:"
     docker images ${DOCKER_USERNAME}/gitlab-ce-zh

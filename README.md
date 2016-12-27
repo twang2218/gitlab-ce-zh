@@ -172,15 +172,15 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 例如： `./build.sh tag 8.15.1-ce.0 v8.15.1`
 
-这表明将使用 `gitlab/gitlab-ce:8.15.1-ce.0` 镜像为基础镜像，以 `v8.15.1` 为基础对比版本，以 `v8.15.1-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `twang2218/gitlab-ce-zh:v8.15.1-zh` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:8.15.1-ce.0` 镜像为基础镜像，以 `v8.15.1` 为基础对比版本，以 `v8.15.1-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `twang2218/gitlab-ce-zh:8.15.1` 的镜像。
 
 ### `run` - 运行某个构建好的镜像
 
 格式为：`./build.sh <镜像标签>`
 
-例如： `./build.sh run v8.15.1-zh`
+例如： `./build.sh run 8.15.1`
 
-这将会以命令 `docker run -d -P twang2218/gitlab-ce-zh:v8.15.1-zh` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
+这将会以命令 `docker run -d -P twang2218/gitlab-ce-zh:8.15.1` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
 
 ```bash
 CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                                                  NAMES
