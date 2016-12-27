@@ -152,9 +152,11 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 ## `build.sh` 构建脚本
 
-提供了一个脚本可以在不写 `Dockerfile` 的情况下直接生成特定版本、分支的汉化版本镜像。这样方便测试还在开发的分支，或者尚未进入 `twang2218/gitlab-ce-zh` 镜像库的镜像。
+`build.sh` 构建脚本是为了对维护本项目提供支持的脚本。脚本含 5 个子命令，分别为 `branch`、`tag`、`run`、`generate`、`ci`。
 
-脚本含 3 个子命令，分别为 `branch`, `tag` 和 `run`。
+其中 `branch`、`tag` 和 `run` 配合使用，可以在不写 `Dockerfile` 的情况下直接生成特定版本、分支的汉化版本镜像。这样方便测试还在开发的分支，或者尚未进入 `twang2218/gitlab-ce-zh` 镜像库的镜像。
+
+而 `generate` 和 `ci` 是维护项目所用的命令。
 
 ### `branch` - 构建某个汉化分支的镜像
 
@@ -162,7 +164,7 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 例如：`./build.sh branch 8.15.1-ce.0 v8.15.1 8-15-stable-zh`
 
-这表明将使用 `gitlab/gitlab-ce:8.15.1-ce.0` 做为基础镜像，并且使用上游版本标签 `v8.15.1` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `gitlab-ce-zh:8-15-stable-zh` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:8.15.1-ce.0` 做为基础镜像，并且使用上游版本标签 `v8.15.1` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `twang2218/gitlab-ce-zh:8-15-stable-zh` 的镜像。
 
 ### `tag` - 构建某个汉化标签的镜像
 
@@ -170,7 +172,7 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 例如： `./build.sh tag 8.15.1-ce.0 v8.15.1`
 
-这表明将使用 `gitlab/gitlab-ce:8.15.1-ce.0` 镜像为基础镜像，以 `v8.15.1` 为基础对比版本，以 `v8.15.1-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `gitlab-ce-zh:v8.15.1-zh` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:8.15.1-ce.0` 镜像为基础镜像，以 `v8.15.1` 为基础对比版本，以 `v8.15.1-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `twang2218/gitlab-ce-zh:v8.15.1-zh` 的镜像。
 
 ### `run` - 运行某个构建好的镜像
 
@@ -178,7 +180,7 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 例如： `./build.sh run v8.15.1-zh`
 
-这将会以命令 `docker run -d -P gitlab-ce-zh:v8.15.1-zh` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
+这将会以命令 `docker run -d -P twang2218/gitlab-ce-zh:v8.15.1-zh` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
 
 ```bash
 CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                                                  NAMES
@@ -186,6 +188,24 @@ CONTAINER ID        IMAGE                         COMMAND             CREATED   
 ```
 
 从 `docker ps` 的结果可以看出，该运行的容器的 `80` 端口映射到了宿主的 `32775` 端口，因此访问 `http://<主机IP>:32775` 就可以看到运行结果。*初次启动会比较慢，要耐心等待。*
+
+### `generate` - 生成 Dockerfile
+
+各个小版本分支的 `Dockerfile`，如 `8.15/Dockerfile` 等，都是使用 `generate` 命令生成的。因此只需要更新 `build.sh` 中的 `generate()` 函数就可以完成各个版本镜像的升级，当然，`README.md` 还需要手动更新。
+
+```bash
+./build.sh generate
+```
+
+执行之后，可以 `git diff` 查看实际变更情况。
+
+### `ci` - 持续集成脚本
+
+`ci` 命令是为了持续集成服务准备的，现在支持 [Travis CI](https://travis-ci.org/)。
+
+在 Travis CI 被触发后，会调用 `./build.sh ci` 命令。该命令会根据环境变量情况决定是整体各个分支检查、构建、发布，还是针对某个标签检查、构建、发布。
+
+镜像构建成功后，会自动发布到 Docker Hub。这种方式比直接使用 Docker Hub 中的正则匹配要灵活。
 
 ## 注意事项
 
