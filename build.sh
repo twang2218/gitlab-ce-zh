@@ -88,7 +88,7 @@ generate() {
 }
 
 ci() {
-    env
+    env | grep TRAVIS
     if [[ "${TRAVIS_BRANCH}" == "master" ]]; then
         check_build_publish 8.11
         check_build_publish 8.12
