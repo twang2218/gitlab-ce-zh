@@ -8,13 +8,24 @@ generate_branch_dockerfile() {
     TAG=$1
     VERSION=$2
     BRANCH=$3
-    cat ./Dockerfile.branch.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g; s/{BRANCH}/${BRANCH}/g"
+    cat ./template/Dockerfile.branch.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g; s/{BRANCH}/${BRANCH}/g"
 }
 
 generate_tag_dockerfile() {
     TAG=$1
     VERSION=$2
-    cat ./Dockerfile.tag.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
+    cat ./template/Dockerfile.tag.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
+}
+
+generate_readme() {
+    TAG_8_11=$1
+    TAG_8_12=$2
+    TAG_8_13=$3
+    TAG_8_14=$4
+    TAG_8_15=$5
+    TAG_LATEST=$TAG_8_15
+    cat ./template/README.md.template \
+        | sed "s/{TAG_8_11}/${TAG_8_11}/g; s/{TAG_8_12}/${TAG_8_12}/g; s/{TAG_8_13}/${TAG_8_13}/g; s/{TAG_8_14}/${TAG_8_14}/g; s/{TAG_8_15}/${TAG_8_15}/g; s/{TAG_LATEST}/${TAG_LATEST}/g;"
 }
 
 check_build_publish() {
@@ -85,6 +96,14 @@ generate() {
     generate_tag_dockerfile     8.14.5-ce.0     v8.14.5     v8.14.5-zh      > 8.14/Dockerfile
     generate_tag_dockerfile     8.15.1-ce.0     v8.15.1     v8.15.1-zh      > 8.15/Dockerfile
     generate_branch_dockerfile  8.15.1-ce.0     v8.15.1     8-15-stable-zh  > testing/Dockerfile
+
+    generate_readme \
+        8.11.11 \
+        8.12.13 \
+        8.13.10 \
+        8.14.5 \
+        8.15.1 \
+        > README.md
 }
 
 ci() {
