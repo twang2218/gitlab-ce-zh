@@ -36,6 +36,8 @@ check_build_publish() {
             docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
             docker push "${DOCKER_USERNAME}/gitlab-ce-zh:${TAG}"
         fi
+    else
+        echo "Nothing changed in ${BRANCH}."
     fi
 }
 
