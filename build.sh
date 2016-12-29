@@ -24,8 +24,14 @@ generate_readme() {
     TAG_8_14=$4
     TAG_8_15=$5
     TAG_LATEST=$TAG_8_15
-    cat ./template/README.md.template \
-        | sed "s/{TAG_8_11}/${TAG_8_11}/g; s/{TAG_8_12}/${TAG_8_12}/g; s/{TAG_8_13}/${TAG_8_13}/g; s/{TAG_8_14}/${TAG_8_14}/g; s/{TAG_8_15}/${TAG_8_15}/g; s/{TAG_LATEST}/${TAG_LATEST}/g;"
+    cat ./template/README.md.template | sed \
+        -e "s/{TAG_8_11}/${TAG_8_11}/g" \
+        -e "s/{TAG_8_12}/${TAG_8_12}/g" \
+        -e "s/{TAG_8_13}/${TAG_8_13}/g" \
+        -e "s/{TAG_8_14}/${TAG_8_14}/g" \
+        -e "s/{TAG_8_15}/${TAG_8_15}/g" \
+        -e "s/{TAG_LATEST}/${TAG_LATEST}/g" \
+        -e "/{COMPOSE_EXAMPLE}/ {r docker-compose.yml" -e "d" -e "}"
 }
 
 check_build_publish() {

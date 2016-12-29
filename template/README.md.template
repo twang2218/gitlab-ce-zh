@@ -44,28 +44,7 @@ docker rm -fv <容器ID>
 正常部署时，可以使用 Docker Compose 来配置启动。建立一个 `docker-compose.yml`，内容如下：
 
 ```yml
-version: '2'
-services:
-    gitlab:
-      image: 'twang2218/gitlab-ce-zh:{TAG_LATEST}'
-      restart: unless-stopped
-      hostname: 'gitlab.example.com'
-      environment:
-        GITLAB_OMNIBUS_CONFIG: |
-          external_url 'http://gitlab.example.com'
-          # Add any other gitlab.rb configuration here, each on its own line
-      ports:
-        - '80:80'
-        - '443:443'
-        - '22:22'
-      volumes:
-        - config:/etc/gitlab
-        - data:/var/opt/gitlab
-        - logs:/var/log/gitlab
-volumes:
-    config:
-    data:
-    logs:
+{COMPOSE_EXAMPLE}
 ```
 
 然后使用命令 `docker-compose up -d` 来启动，停止服务使用 `docker-compose down`。
