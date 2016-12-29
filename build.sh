@@ -17,6 +17,11 @@ generate_tag_dockerfile() {
     cat ./template/Dockerfile.tag.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
 }
 
+generate_docker_compose_yml() {
+    TAG_LATEST=$1
+    cat ./template/docker-compose.yml.template | sed "s/{TAG_LATEST}/${TAG_LATEST}/g"
+}
+
 generate_readme() {
     TAG_8_11=$1
     TAG_8_12=$2
@@ -102,6 +107,8 @@ generate() {
     generate_tag_dockerfile     8.14.5-ce.0     v8.14.5     v8.14.5-zh      > 8.14/Dockerfile
     generate_tag_dockerfile     8.15.1-ce.0     v8.15.1     v8.15.1-zh      > 8.15/Dockerfile
     generate_branch_dockerfile  8.15.1-ce.0     v8.15.1     8-15-stable-zh  > testing/Dockerfile
+
+    generate_docker_compose_yml 8.15.1 > docker-compose.yml
 
     generate_readme \
         8.11.11 \
