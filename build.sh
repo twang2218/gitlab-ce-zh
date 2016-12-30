@@ -131,7 +131,7 @@ ci() {
     elif [[ -n "${TRAVIS_TAG}" ]]; then
         MINOR_VERSION=$(echo "${TRAVIS_TAG}" | cut -d'.' -f2)
         BRANCH="8.${MINOR_VERSION}"
-        check_and_build "${BRANCH}" "${TRAVIS_TAG:1}"
+        check_build_publish "${BRANCH}" "${TRAVIS_TAG:1}"
     else
         echo "Not in CI."
     fi
