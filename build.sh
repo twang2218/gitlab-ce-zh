@@ -48,7 +48,7 @@ check_build_publish() {
         TAG=${BRANCH}
     fi
 
-    FILES=$(git show --stat HEAD~1 | grep '|' | cut -d' ' -f2)
+    FILES=$(git show --pretty="" --name-only master | grep Dockerfile)
     if (echo "${FILES}" | grep -q ${BRANCH}); then
         echo "${BRANCH} has been updated, need rebuild ${DOCKER_USERNAME}/gitlab-ce-zh:${TAG} ..."
 
