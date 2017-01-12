@@ -39,25 +39,29 @@ generate_readme() {
         -e "/{COMPOSE_EXAMPLE}/ {r docker-compose.yml" -e "d" -e "}"
 }
 
+build_and_publish() {
+    BRANCH=$1
+    TAG=$2
+    set -xe
+    docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${TAG}" "${BRANCH}"
+    if [[ -n "${DOCKER_PASSWORD}" ]]; then
+        echo "Publish image '${DOCKER_USERNAME}/gitlab-ce-zh:${TAG}' to Docker Hub ..."
+        docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
+        docker push "${DOCKER_USERNAME}/gitlab-ce-zh:${TAG}"
+    fi
+    set +xe
+}
+
 check_build_publish() {
     BRANCH=$1
     TAG=$2
 
-    # If the TAG is empty, then use BRANCH name as TAG name for image
-    if [[ -z "${TAG}" ]]; then
-        TAG=${BRANCH}
-    fi
-
-    FILES=$(git show --pretty="" --name-only master | grep Dockerfile)
-    if (echo "${FILES}" | grep -q ${BRANCH}); then
-        echo "${BRANCH} has been updated, need rebuild ${DOCKER_USERNAME}/gitlab-ce-zh:${TAG} ..."
-
-        docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${TAG}" ${BRANCH}
-        if [[ -n "${DOCKER_PASSWORD}" ]]; then
-            echo "Publish image '${DOCKER_USERNAME}/gitlab-ce-zh:${TAG}' to Docker Hub ..."
-            docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
-            docker push "${DOCKER_USERNAME}/gitlab-ce-zh:${TAG}"
-        fi
+    if [[ -n "${TAG}" ]]; then
+        echo "Found tag ${TAG}, building ${DOCKER_USERNAME}/gitlab-ce-zh:${TAG} ..."
+        build_and_publish "${BRANCH}" "${TAG}"
+    elif (git show --pretty="" --name-only | grep Dockerfile | grep -q ${BRANCH}); then
+        echo "${BRANCH} has been updated, rebuilding ${DOCKER_USERNAME}/gitlab-ce-zh:${BRANCH} ..."
+        build_and_publish "${BRANCH}" "${BRANCH}"
     else
         echo "Nothing changed in ${BRANCH}."
     fi
@@ -105,17 +109,17 @@ source ./build-version.sh
 
 ci() {
     env | grep TRAVIS
-    if [[ "${TRAVIS_BRANCH}" == "master" ]]; then
+    if [[ -n "${TRAVIS_TAG}" ]]; then
+        MINOR_VERSION=$(echo "${TRAVIS_TAG}" | cut -d'.' -f2)
+        BRANCH="8.${MINOR_VERSION}"
+        check_build_publish "${BRANCH}" "${TRAVIS_TAG:1}"
+    elif [[ "${TRAVIS_BRANCH}" == "master" ]]; then
         check_build_publish 8.11
         check_build_publish 8.12
         check_build_publish 8.13
         check_build_publish 8.14
         check_build_publish 8.15
         check_build_publish testing
-    elif [[ -n "${TRAVIS_TAG}" ]]; then
-        MINOR_VERSION=$(echo "${TRAVIS_TAG}" | cut -d'.' -f2)
-        BRANCH="8.${MINOR_VERSION}"
-        check_build_publish "${BRANCH}" "${TRAVIS_TAG:1}"
     else
         echo "Not in CI."
     fi
