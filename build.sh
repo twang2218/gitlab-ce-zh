@@ -4,25 +4,25 @@ if [[ -z "${DOCKER_USERNAME}" ]]; then
     DOCKER_USERNAME=twang2218
 fi
 
-generate_branch_dockerfile() {
+function generate_branch_dockerfile() {
     TAG=$1
     VERSION=$2
     BRANCH=$3
     cat ./template/Dockerfile.branch.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g; s/{BRANCH}/${BRANCH}/g"
 }
 
-generate_tag_dockerfile() {
+function generate_tag_dockerfile() {
     TAG=$1
     VERSION=$2
     cat ./template/Dockerfile.tag.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
 }
 
-generate_docker_compose_yml() {
+function generate_docker_compose_yml() {
     TAG_LATEST=$1
     cat ./template/docker-compose.yml.template | sed "s/{TAG_LATEST}/${TAG_LATEST}/g"
 }
 
-generate_readme() {
+function generate_readme() {
     TAG_8_11=$1
     TAG_8_12=$2
     TAG_8_13=$3
@@ -39,7 +39,7 @@ generate_readme() {
         -e "/{COMPOSE_EXAMPLE}/ {r docker-compose.yml" -e "d" -e "}"
 }
 
-build_and_publish() {
+function build_and_publish() {
     BRANCH=$1
     TAG=$2
     set -xe
@@ -52,7 +52,7 @@ build_and_publish() {
     set +xe
 }
 
-check_build_publish() {
+function check_build_publish() {
     BRANCH=$1
     TAG=$2
 
@@ -67,7 +67,7 @@ check_build_publish() {
     fi
 }
 
-branch() {
+function branch() {
     if [ "$#" != "3" ]; then
         echo "Usage: $0 branch <image-tag> <version-tag> <branch>"
         echo ""
@@ -86,7 +86,7 @@ branch() {
     docker images ${DOCKER_USERNAME}/gitlab-ce-zh
 }
 
-tag() {
+function tag() {
     if [ "$#" != "2" ]; then
         echo "Usage: $0 tag <image-tag> <version-tag>"
         echo ""
@@ -107,7 +107,7 @@ tag() {
 # Version related functions, such as 'generate()' are put in separate file.
 source ./build-version.sh
 
-ci() {
+function ci() {
     env | grep TRAVIS
     if [[ -n "${TRAVIS_TAG}" ]]; then
         MINOR_VERSION=$(echo "${TRAVIS_TAG}" | cut -d'.' -f2)
@@ -126,13 +126,15 @@ ci() {
 
     if [[ -n "${DOCKER_TRIGGER_LINK}" ]]; then
         echo "Triggering the 'latest' build ..."
+        set -xe
         curl -s -H "Content-Type: application/json" --data '{"docker_tag": "latest"}' -X POST "${DOCKER_TRIGGER_LINK}"
+        set +xe
     fi
 
     docker images "${DOCKER_USERNAME}/gitlab-ce-zh"
 }
 
-run() {
+function run() {
     if [ "$#" != "1" ]; then
         echo "Usage: $0 run <image-tag>"
         echo ""
@@ -146,7 +148,7 @@ run() {
     docker ps
 }
 
-main() {
+function main() {
     Command=$1
     shift
     case "$Command" in
