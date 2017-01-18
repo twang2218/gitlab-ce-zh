@@ -28,6 +28,9 @@ function generate_readme() {
     TAG_8_13=$3
     TAG_8_14=$4
     TAG_8_15=$5
+    TESTING_VERSION=$6
+    TESTING_TAG=$7
+    TESTING_BRANCH=$8
     TAG_LATEST=$TAG_8_15
     cat ./template/README.md.template | sed \
         -e "s/{TAG_8_11}/${TAG_8_11}/g" \
@@ -35,6 +38,9 @@ function generate_readme() {
         -e "s/{TAG_8_13}/${TAG_8_13}/g" \
         -e "s/{TAG_8_14}/${TAG_8_14}/g" \
         -e "s/{TAG_8_15}/${TAG_8_15}/g" \
+        -e "s/{TESTING_VERSION}/${TESTING_VERSION}/g" \
+        -e "s/{TESTING_TAG}/${TESTING_TAG}/g" \
+        -e "s/{TESTING_BRANCH}/${TESTING_BRANCH}/g" \
         -e "s/{TAG_LATEST}/${TAG_LATEST}/g" \
         -e "/{COMPOSE_EXAMPLE}/ {r docker-compose.yml" -e "d" -e "}"
 }
