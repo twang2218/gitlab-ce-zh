@@ -149,7 +149,7 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 `testing` 镜像是为了帮助翻译项目制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
-它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.16.0-rc3` 标签和 `8-16-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:8.16.0-rc3.ce.0` 进行应用汉化结果进行构建的。
+它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.16.0` 标签和 `8-16-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:8.16.0.ce.0` 进行应用汉化结果进行构建的。
 
 测试镜像将会在 [`8-16-stable-zh` 分支](https://gitlab.com/xhang/gitlab/commits/8-16-stable-zh) 发生改变后 10 分钟内进行镜像构建，从而确保最新的翻译改变可以反映到测试镜像中，方便测试翻译结果。
 

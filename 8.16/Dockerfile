@@ -1,17 +1,12 @@
-FROM gitlab/gitlab-ce:8.16.0.ce.0
-ENV GITLAB_VERSION=8-16-stable-zh
+FROM gitlab/gitlab-ce:8.16.0-ce.0
+ENV GITLAB_VERSION=v8.16.0
 RUN set -xe \
     && echo " # Generating translation patch ..." \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff v8.16.0..origin/8-16-stable-zh > ../zh_CN.diff \
+    && git diff v8.16.0..v8.16.0-zh > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
-    && echo " # Install missing Gem packages ..." \
-    && CURRENT_DIR=$PWD \
-    && cd /opt/gitlab/embedded/service/gitlab-rails \
-    && bundle install \
-    && cd $CURRENT_DIR \
     && echo " # Cleaning ..." \
     && cd .. \
     && rm -rf gitlab \
