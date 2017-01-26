@@ -28,10 +28,10 @@ function generate_readme() {
     TAG_8_14=$3
     TAG_8_15=$4
     TAG_8_16=$5
-    TESTING_VERSION=$6
-    TESTING_TAG=$7
-    TESTING_BRANCH=$8
-    TAG_LATEST=$TAG_8_15
+    TAG_LATEST=$6
+    TESTING_VERSION=$7
+    TESTING_TAG=$8
+    TESTING_BRANCH=$9
     cat ./template/README.md.template | sed \
         -e "s/{TAG_8_12}/${TAG_8_12}/g" \
         -e "s/{TAG_8_13}/${TAG_8_13}/g" \
