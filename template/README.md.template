@@ -1,10 +1,10 @@
 # 支持的 tags 和对应的 `Dockerfile`
 
-- [`8.11`, `{TAG_8_11}` (*8.11/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.11/Dockerfile)
 - [`8.12`, `{TAG_8_12}` (*8.12/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.12/Dockerfile)
 - [`8.13`, `{TAG_8_13}` (*8.13/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.13/Dockerfile)
 - [`8.14`, `{TAG_8_14}` (*8.14/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.14/Dockerfile)
-- [`8.15`, `{TAG_8_15}`, `latest` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
+- [`8.15`, `{TAG_8_15}` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
+- [`8.16`, `{TAG_8_16}`, `latest` (*8.16/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.16/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
 [![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)

@@ -23,21 +23,21 @@ function generate_docker_compose_yml() {
 }
 
 function generate_readme() {
-    TAG_8_11=$1
-    TAG_8_12=$2
-    TAG_8_13=$3
-    TAG_8_14=$4
-    TAG_8_15=$5
+    TAG_8_12=$1
+    TAG_8_13=$2
+    TAG_8_14=$3
+    TAG_8_15=$4
+    TAG_8_16=$5
     TESTING_VERSION=$6
     TESTING_TAG=$7
     TESTING_BRANCH=$8
     TAG_LATEST=$TAG_8_15
     cat ./template/README.md.template | sed \
-        -e "s/{TAG_8_11}/${TAG_8_11}/g" \
         -e "s/{TAG_8_12}/${TAG_8_12}/g" \
         -e "s/{TAG_8_13}/${TAG_8_13}/g" \
         -e "s/{TAG_8_14}/${TAG_8_14}/g" \
         -e "s/{TAG_8_15}/${TAG_8_15}/g" \
+        -e "s/{TAG_8_16}/${TAG_8_16}/g" \
         -e "s/{TESTING_VERSION}/${TESTING_VERSION}/g" \
         -e "s/{TESTING_TAG}/${TESTING_TAG}/g" \
         -e "s/{TESTING_BRANCH}/${TESTING_BRANCH}/g" \
@@ -120,11 +120,11 @@ function ci() {
         BRANCH="8.${MINOR_VERSION}"
         check_build_publish "${BRANCH}" "${TRAVIS_TAG:1}"
     elif [[ "${TRAVIS_BRANCH}" == "master" ]]; then
-        check_build_publish 8.11
         check_build_publish 8.12
         check_build_publish 8.13
         check_build_publish 8.14
         check_build_publish 8.15
+        check_build_publish 8.16
         check_build_publish testing
     else
         echo "Not in CI."
