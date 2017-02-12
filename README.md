@@ -4,7 +4,7 @@
 - [`8.13`, `8.13.12` (*8.13/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.13/Dockerfile)
 - [`8.14`, `8.14.7` (*8.14/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.14/Dockerfile)
 - [`8.15`, `8.15.5` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
-- [`8.16`, `8.16.1`, `latest` (*8.16/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.16/Dockerfile)
+- [`8.16`, `8.16.4`, `latest` (*8.16/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.16/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
 [![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
@@ -24,7 +24,7 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 twang2218/gitlab-ce-zh:8.16.1
+docker run -d -p 3000:80 twang2218/gitlab-ce-zh:8.16.4
 ```
 
 *可以将 `8.16.1` 换成你所需要的版本标签。*
@@ -47,7 +47,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:8.16.1'
+      image: 'twang2218/gitlab-ce-zh:8.16.4'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
