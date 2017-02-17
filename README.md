@@ -2,9 +2,9 @@
 
 - [`8.12`, `8.12.13` (*8.12/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.12/Dockerfile)
 - [`8.13`, `8.13.12` (*8.13/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.13/Dockerfile)
-- [`8.14`, `8.14.7` (*8.14/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.14/Dockerfile)
+- [`8.14`, `8.14.8` (*8.14/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.14/Dockerfile)
 - [`8.15`, `8.15.5` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
-- [`8.16`, `8.16.1`, `latest` (*8.16/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.16/Dockerfile)
+- [`8.16`, `8.16.2`, `latest` (*8.16/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.16/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
 [![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
@@ -24,10 +24,10 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 twang2218/gitlab-ce-zh:8.16.1
+docker run -d -p 3000:80 twang2218/gitlab-ce-zh:8.16.2
 ```
 
-*可以将 `8.16.1` 换成你所需要的版本标签。*
+*可以将 `8.16.2` 换成你所需要的版本标签。*
 
 启动后就可以通过主机的 `3000` 端口看到运行结果了，比如用的是本机 Docker 的话，访问：<http://localhost:3000> 即可。
 
@@ -47,7 +47,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:8.16.1'
+      image: 'twang2218/gitlab-ce-zh:8.16.2'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -120,7 +120,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    twang2218/gitlab-ce-zh:8.16.1
+    twang2218/gitlab-ce-zh:8.16.2
 ```
 
 如果需要进入容器修改配置文件，可以用 `docker exec` 命令进入容器：
@@ -149,7 +149,7 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 `testing` 镜像是为了帮助翻译项目制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
-它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.16.1` 标签和 `8-16-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:8.16.1-ce.0` 进行应用汉化结果进行构建的。
+它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v8.16.2` 标签和 `8-16-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:8.16.2-ce.0` 进行应用汉化结果进行构建的。
 
 测试镜像将会在 [`8-16-stable-zh` 分支](https://gitlab.com/xhang/gitlab/commits/8-16-stable-zh) 发生改变后 10 分钟内进行镜像构建，从而确保最新的翻译改变可以反映到测试镜像中，方便测试翻译结果。
 
@@ -174,25 +174,25 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 格式为：`./build.sh branch <基础镜像标签> <英文版本标签> <汉化版本分支>`
 
-例如：`./build.sh branch 8.16.1-ce.0 v8.16.1 8-15-stable-zh`
+例如：`./build.sh branch 8.16.2-ce.0 v8.16.2 8-15-stable-zh`
 
-这表明将使用 `gitlab/gitlab-ce:8.16.1-ce.0` 做为基础镜像，并且使用上游版本标签 `v8.16.1` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `twang2218/gitlab-ce-zh:8-15-stable-zh` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:8.16.2-ce.0` 做为基础镜像，并且使用上游版本标签 `v8.16.2` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `twang2218/gitlab-ce-zh:8-15-stable-zh` 的镜像。
 
 ### `tag` - 构建某个汉化标签的镜像
 
 格式为：`./build.sh tag <基础镜像标签> <英文版本标签>`
 
-例如： `./build.sh tag 8.16.1-ce.0 v8.16.1`
+例如： `./build.sh tag 8.16.2-ce.0 v8.16.2`
 
-这表明将使用 `gitlab/gitlab-ce:8.16.1-ce.0` 镜像为基础镜像，以 `v8.16.1` 为基础对比版本，以 `v8.16.1-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `twang2218/gitlab-ce-zh:8.16.1` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:8.16.2-ce.0` 镜像为基础镜像，以 `v8.16.2` 为基础对比版本，以 `v8.16.2-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `twang2218/gitlab-ce-zh:8.16.2` 的镜像。
 
 ### `run` - 运行某个构建好的镜像
 
 格式为：`./build.sh <镜像标签>`
 
-例如： `./build.sh run 8.16.1`
+例如： `./build.sh run 8.16.2`
 
-这将会以命令 `docker run -d -P twang2218/gitlab-ce-zh:8.16.1` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
+这将会以命令 `docker run -d -P twang2218/gitlab-ce-zh:8.16.2` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
 
 ```bash
 CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                                                  NAMES
