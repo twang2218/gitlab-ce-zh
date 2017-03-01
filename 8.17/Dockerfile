@@ -1,6 +1,6 @@
-FROM gitlab/gitlab-ce:8.17.0-ce.0
+FROM gitlab/gitlab-ce:8.17.1-ce.2
 
-ENV GITLAB_VERSION=v8.17.0
+ENV GITLAB_VERSION=v8.17.1
 RUN locale-gen en_US.UTF-8
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 
@@ -16,7 +16,7 @@ RUN set -xe \
     && cd / \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff v8.17.0..v8.17.0-zh > ../zh_CN.diff \
+    && git diff v8.17.1..v8.17.1-zh > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Regenerating the assets" \
