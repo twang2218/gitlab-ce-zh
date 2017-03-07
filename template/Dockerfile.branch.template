@@ -9,7 +9,7 @@ RUN set -xe \
     && echo " # Generating translation patch ..." \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff {VERSION}..origin/{BRANCH} > ../zh_CN.diff \
+    && git diff {VERSION}..origin/{BRANCH} -- . ':!spec' ':!features' > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Install missing Gem packages ..." \

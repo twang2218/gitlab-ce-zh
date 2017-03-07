@@ -16,7 +16,7 @@ RUN set -xe \
     && cd / \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff v8.17.2..v8.17.2-zh > ../zh_CN.diff \
+    && git diff v8.17.2..v8.17.2-zh -- . ':!spec' ':!features' > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Regenerating the assets" \
