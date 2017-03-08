@@ -5,9 +5,9 @@ function generate() {
     version_8_14=8.14.10
     version_8_15=8.15.7
     version_8_16=8.16.7
-    version_8_17=8.17.2
+    version_8_17=8.17.3
     version_latest=${version_8_17}
-    testing_version=8.17.2
+    testing_version=8.17.3
     testing_tag=${testing_version}-ce.0
     testing_branch=8-17-stable-zh
 
