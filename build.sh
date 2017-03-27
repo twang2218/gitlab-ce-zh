@@ -15,7 +15,7 @@ function generate_branch_v17_dockerfile() {
     TAG=$1
     VERSION=$2
     BRANCH=$3
-    cat ./template/Dockerfile.branch.v17.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g; s/{BRANCH}/${BRANCH}/g"
+    cat ./template/Dockerfile.branch.v8.17.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g; s/{BRANCH}/${BRANCH}/g"
 }
 
 function generate_tag_dockerfile() {
@@ -27,7 +27,7 @@ function generate_tag_dockerfile() {
 function generate_tag_v17_dockerfile() {
     TAG=$1
     VERSION=$2
-    cat ./template/Dockerfile.tag.v17.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
+    cat ./template/Dockerfile.tag.v8.17.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
 }
 
 function generate_docker_compose_yml() {
