@@ -11,7 +11,7 @@ function generate_branch_dockerfile() {
     cat ./template/Dockerfile.branch.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g; s/{BRANCH}/${BRANCH}/g"
 }
 
-function generate_branch_v17_dockerfile() {
+function generate_branch_v8_17_dockerfile() {
     TAG=$1
     VERSION=$2
     BRANCH=$3
@@ -24,7 +24,7 @@ function generate_tag_dockerfile() {
     cat ./template/Dockerfile.tag.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
 }
 
-function generate_tag_v17_dockerfile() {
+function generate_tag_v8_17_dockerfile() {
     TAG=$1
     VERSION=$2
     cat ./template/Dockerfile.tag.v8.17.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
@@ -36,21 +36,21 @@ function generate_docker_compose_yml() {
 }
 
 function generate_readme() {
-    TAG_8_13=$1
-    TAG_8_14=$2
-    TAG_8_15=$3
-    TAG_8_16=$4
-    TAG_8_17=$5
+    TAG_8_14=$1
+    TAG_8_15=$2
+    TAG_8_16=$3
+    TAG_8_17=$4
+    TAG_9_0=$5
     TAG_LATEST=$6
     TESTING_VERSION=$7
     TESTING_TAG=$8
     TESTING_BRANCH=$9
     cat ./template/README.md.template | sed \
-        -e "s/{TAG_8_13}/${TAG_8_13}/g" \
         -e "s/{TAG_8_14}/${TAG_8_14}/g" \
         -e "s/{TAG_8_15}/${TAG_8_15}/g" \
         -e "s/{TAG_8_16}/${TAG_8_16}/g" \
         -e "s/{TAG_8_17}/${TAG_8_17}/g" \
+        -e "s/{TAG_9_0}/${TAG_9_0}/g" \
         -e "s/{TESTING_VERSION}/${TESTING_VERSION}/g" \
         -e "s/{TESTING_TAG}/${TESTING_TAG}/g" \
         -e "s/{TESTING_BRANCH}/${TESTING_BRANCH}/g" \
@@ -97,7 +97,7 @@ function branch() {
     VERSION=$2
     BRANCH=$3
 
-    Dockerfile=$(generate_branch_v17_dockerfile ${TAG} ${VERSION} ${BRANCH})
+    Dockerfile=$(generate_branch_v8_17_dockerfile ${TAG} ${VERSION} ${BRANCH})
     echo "$Dockerfile"
     echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${BRANCH}" -
     echo ""
@@ -115,7 +115,7 @@ function tag() {
     TAG=$1
     VERSION=$2
 
-    Dockerfile=$(generate_tag_v17_dockerfile ${TAG} ${VERSION})
+    Dockerfile=$(generate_tag_v8_17_dockerfile ${TAG} ${VERSION})
     echo "$Dockerfile"
     echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${VERSION:1}" -
     echo ""
@@ -133,11 +133,11 @@ function ci() {
         BRANCH="8.${MINOR_VERSION}"
         check_build_publish "${BRANCH}" "${TRAVIS_TAG:1}"
     elif [[ "${TRAVIS_BRANCH}" == "master" ]]; then
-        check_build_publish 8.13
         check_build_publish 8.14
         check_build_publish 8.15
         check_build_publish 8.16
         check_build_publish 8.17
+        check_build_publish 9.0
         check_build_publish testing
     else
         echo "Not in CI."
