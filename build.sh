@@ -97,7 +97,7 @@ function branch() {
     VERSION=$2
     BRANCH=$3
 
-    Dockerfile=$(generate_branch_dockerfile ${TAG} ${VERSION} ${BRANCH})
+    Dockerfile=$(generate_branch_v17_dockerfile ${TAG} ${VERSION} ${BRANCH})
     echo "$Dockerfile"
     echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${BRANCH}" -
     echo ""
@@ -115,7 +115,7 @@ function tag() {
     TAG=$1
     VERSION=$2
 
-    Dockerfile=$(generate_tag_dockerfile ${TAG} ${VERSION})
+    Dockerfile=$(generate_tag_v17_dockerfile ${TAG} ${VERSION})
     echo "$Dockerfile"
     echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${VERSION:1}" -
     echo ""

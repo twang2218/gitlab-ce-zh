@@ -10,7 +10,7 @@ RUN set -xe \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && buildDeps='lsb-release patch nodejs build-essential yarn' \
+    && buildDeps='lsb-release patch nodejs python build-essential yarn' \
     && apt-get install -yqq $buildDeps \
     && echo " # Generating translation patch ..." \
     && cd / \
@@ -25,12 +25,12 @@ RUN set -xe \
     && cp config/database.yml.postgresql config/database.yml \
     && cp config/secrets.yml.example config/secrets.yml \
     && rm -rf public/assets \
-    && yarn install --pure-lockfile --production \
+    && yarn install --pure-lockfile \
     && RAILS_ENV=production \
         NO_PRIVILEGE_DROP=true \
         USE_DB=false \
         SKIP_STORAGE_VALIDATION=true \
-        bundle exec rake gitlab:assets:clean gitlab:assets:compile \
+        bundle exec rake gitlab:assets:compile \
     && rm -rf log \
         tmp \
         config/gitlab.yml \
