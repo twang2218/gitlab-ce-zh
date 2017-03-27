@@ -129,9 +129,11 @@ source ./build-version.sh
 function ci() {
     env | grep TRAVIS
     if [[ -n "${TRAVIS_TAG}" ]]; then
-        MINOR_VERSION=$(echo "${TRAVIS_TAG}" | cut -d'.' -f2)
-        BRANCH="8.${MINOR_VERSION}"
-        check_build_publish "${BRANCH}" "${TRAVIS_TAG:1}"
+        TAG="${TRAVIS_TAG:1}"
+        MAJOR_VERSION=$(echo "${TAG}" | cut -d'.' -f1)
+        MINOR_VERSION=$(echo "${TAG}" | cut -d'.' -f2)
+        BRANCH="${MAJOR_VERSION}.${MINOR_VERSION}"
+        check_build_publish "${BRANCH}" "${TAG}"
     elif [[ "${TRAVIS_BRANCH}" == "master" ]]; then
         check_build_publish 8.14
         check_build_publish 8.15

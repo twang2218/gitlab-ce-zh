@@ -2,9 +2,9 @@
 
 function generate() {
     version_8_14=8.14.10
-    version_8_15=8.15.7
-    version_8_16=8.16.7
-    version_8_17=8.17.3
+    version_8_15=8.15.8
+    version_8_16=8.16.8
+    version_8_17=8.17.4
     version_9_0=9.0.0
     version_latest=${version_9_0}
     testing_version=9.0.0
