@@ -3,11 +3,11 @@
 function generate() {
     version_8_14=8.14.10
     version_8_15=8.15.8
-    version_8_16=8.16.8
-    version_8_17=8.17.4
-    version_9_0=9.0.3
+    version_8_16=8.16.9
+    version_8_17=8.17.5
+    version_9_0=9.0.4
     version_latest=${version_9_0}
-    testing_version=9.0.3
+    testing_version=9.0.4
     testing_tag=${testing_version}-ce.0
     testing_branch=9-0-stable-zh
 

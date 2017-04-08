@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:9.0.3-ce.0
+FROM gitlab/gitlab-ce:9.0.4-ce.0
 
 ENV GITLAB_VERSION=9-0-stable-zh
 RUN locale-gen en_US.UTF-8
@@ -16,7 +16,7 @@ RUN set -xe \
     && cd / \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff v9.0.3..origin/9-0-stable-zh -- . ':!spec' ':!features' > ../zh_CN.diff \
+    && git diff v9.0.4..origin/9-0-stable-zh -- . ':!spec' ':!features' > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Install missing Gem packages ..." \
