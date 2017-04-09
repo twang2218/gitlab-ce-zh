@@ -10,13 +10,14 @@ RUN set -xe \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && buildDeps='lsb-release patch nodejs python build-essential yarn' \
+    && buildDeps='lsb-release patch nodejs python build-essential yarn cmake' \
     && apt-get install -yqq $buildDeps \
     && echo " # Generating translation patch ..." \
     && cd / \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff v9.0.4..origin/9-0-stable-zh -- . ':!spec' ':!features' > ../zh_CN.diff \
+    && REVISION=$(cat /opt/gitlab/embedded/service/gitlab-rails/REVISION) \
+    && git diff --diff-filter=d v9.0.4..origin/9-0-stable-zh -- . ':!spec' ':!features' ':!.gitignore' > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Install missing Gem packages ..." \

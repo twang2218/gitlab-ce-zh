@@ -1,2 +1,4 @@
 *.diff
 gitlab/*
+gitlab-*
+*.log

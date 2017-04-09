@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BASEDIR=$(dirname $0)
+
 if [[ -z "${DOCKER_USERNAME}" ]]; then
     DOCKER_USERNAME=twang2218
 fi
@@ -8,31 +10,31 @@ function generate_branch_dockerfile() {
     TAG=$1
     VERSION=$2
     BRANCH=$3
-    cat ./template/Dockerfile.branch.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g; s/{BRANCH}/${BRANCH}/g"
+    cat ./template/Dockerfile.branch.template | sed "s:{TAG}:${TAG}:g; s:{VERSION}:${VERSION}:g; s:{BRANCH}:${BRANCH}:g"
 }
 
 function generate_branch_v8_17_dockerfile() {
     TAG=$1
     VERSION=$2
     BRANCH=$3
-    cat ./template/Dockerfile.branch.v8.17.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g; s/{BRANCH}/${BRANCH}/g"
+    cat ./template/Dockerfile.branch.v8.17.template | sed "s:{TAG}:${TAG}:g; s:{VERSION}:${VERSION}:g; s:{BRANCH}:${BRANCH}:g"
 }
 
 function generate_tag_dockerfile() {
     TAG=$1
     VERSION=$2
-    cat ./template/Dockerfile.tag.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
+    cat ./template/Dockerfile.tag.template | sed "s:{TAG}:${TAG}:g; s:{VERSION}:${VERSION}:g;"
 }
 
 function generate_tag_v8_17_dockerfile() {
     TAG=$1
     VERSION=$2
-    cat ./template/Dockerfile.tag.v8.17.template | sed "s/{TAG}/${TAG}/g; s/{VERSION}/${VERSION}/g;"
+    cat ./template/Dockerfile.tag.v8.17.template | sed "s:{TAG}:${TAG}:g; s:{VERSION}:${VERSION}:g;"
 }
 
 function generate_docker_compose_yml() {
     TAG_LATEST=$1
-    cat ./template/docker-compose.yml.template | sed "s/{TAG_LATEST}/${TAG_LATEST}/g"
+    cat ./template/docker-compose.yml.template | sed "s:{TAG_LATEST}:${TAG_LATEST}:g"
 }
 
 function generate_readme() {
@@ -124,7 +126,8 @@ function tag() {
 }
 
 # Version related functions, such as 'generate()' are put in separate file.
-source ./build-version.sh
+# shellcheck source=./build-version.sh
+source $BASEDIR/build-version.sh
 
 function ci() {
     env | grep TRAVIS
@@ -141,6 +144,7 @@ function ci() {
         check_build_publish 8.17
         check_build_publish 9.0
         check_build_publish testing
+        check_build_publish master
     else
         echo "Not in CI."
     fi
@@ -169,6 +173,54 @@ function run() {
     docker ps
 }
 
+# Add to cron by 'crontab -e'
+# */5 * * * * build.sh detect_and_build >> trigger.log 2>&1
+
+function prepare_branch() {
+    local TAG=$1
+    local BRANCH=$2
+    local TAG_DIR=$BASEDIR/gitlab-${TAG}
+
+    rm -rf $BRANCH_DIR
+    git clone https://gitlab.com/xhang/gitlab.git $TAG_DIR
+    cd $TAG_DIR || return 1
+    git checkout ${BRANCH}
+}
+
+function detect_branch_change() {
+    local TAG=$1
+    local TAG_DIR=$BASEDIR/gitlab-${TAG}
+
+    cd $TAG_DIR || return 2
+    git remote update > /dev/null
+    if ! (git status -uno | grep -q 'up-to-date') ; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+function trigger_build() {
+    local TAG=$1
+    curl --silent \
+        --header "Content-Type: application/json" \
+        --request POST \
+        --data "{\"docker_tag\": \"${TAG}\"}" \
+        https://registry.hub.docker.com/u/twang2218/gitlab-ce-zh/trigger/f78a6063-8c23-4997-b925-92c8093b5e83/
+    echo -e "\ndone."
+}
+
+function detect_and_build() {
+    local TAG=$1
+    if detect_branch_change $TAG; then
+        echo "`date`: Changes in '$TAG' detected..."
+        trigger_build $TAG
+        git pull
+    # else
+    #     echo "`date`: Nothing changed in '$TAG'"
+    fi
+}
+
 function main() {
     Command=$1
     shift
@@ -178,7 +230,15 @@ function main() {
         generate)   generate ;;
         run)        run "$@" ;;
         ci)         ci ;;
-        *)          echo "Usage: $0 <branch|tag|generate|run|ci>" ;;
+        prepare)
+            prepare_branch testing 9-0-stable-zh
+            prepare_branch master master-zh
+            ;;
+        detect_and_build)
+            detect_and_build testing
+            detect_and_build master
+            ;;
+        *)          echo "Usage: $0 <branch|tag|generate|run|ci|prepare|detect_and_build>" ;;
     esac
 }
 

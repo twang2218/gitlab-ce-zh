@@ -7,7 +7,7 @@ function generate() {
     version_8_17=8.17.5
     version_9_0=9.0.4
     version_latest=${version_9_0}
-    testing_version=9.0.4
+    testing_version=${version_9_0}
     testing_tag=${testing_version}-ce.0
     testing_branch=9-0-stable-zh
 
@@ -17,8 +17,9 @@ function generate() {
     generate_tag_v8_17_dockerfile       ${version_8_17}-ce.0    v${version_8_17}    v${version_8_17}-zh     > 8.17/Dockerfile
     generate_tag_v8_17_dockerfile       ${version_9_0}-ce.0     v${version_9_0}     v${version_9_0}-zh      > 9.0/Dockerfile
     generate_branch_v8_17_dockerfile    ${testing_tag}          v${testing_version} ${testing_branch}       > testing/Dockerfile
+    generate_branch_v8_17_dockerfile    ${testing_tag}          '$REVISION'         master-zh               > master/Dockerfile
 
-    generate_docker_compose_yml ${version_latest} > docker-compose.yml
+    generate_docker_compose_yml         ${version_latest}       > docker-compose.yml
 
     generate_readme \
         ${version_8_14} \
