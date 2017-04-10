@@ -6,6 +6,7 @@
 - [`8.17`, `8.17.5` (*8.17/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.17/Dockerfile)
 - [`9.0`, `9.0.4`, `latest` (*9.0/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.0/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
+- [`master` (*master/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/master/Dockerfile)
 
 [![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
 [![Image Layers and Size](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh)
@@ -15,9 +16,10 @@
 
 这是汉化的 GitLab 社区版 Docker Image [twang2218/gitlab-ce-zh](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，基于官方提供的 Docker Image  [gitlab/gitlab-ce](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> (8.9以前的版本) 和谢航的汉化 <https://gitlab.com/xhang/gitlab> (8.9 以后的版本) 而制作。
 
-如果碰到汉化问题，欢迎到 <https://gitlab.com/xhang/gitlab/issues> 来提交 Issue 甚至 Merge Request；如果碰到镜像问题，欢迎到 <https://github.com/twang2218/gitlab-ce-zh/issues> 来提交 Issue 或 Pull Request。大家的贡献才能让汉化项目变得更好。
+* 如果碰到汉化问题，欢迎到 <https://gitlab.com/xhang/gitlab/issues> 来提交 Issue 甚至 Merge Request；
+* 如果碰到镜像问题，欢迎到 <https://github.com/twang2218/gitlab-ce-zh/issues> 来提交 Issue 或 Pull Request。
 
-如果喜欢本项目，不要忘了加星标啊。 ☺
+大家的贡献才能让汉化项目变得更好。如果喜欢本项目，不要忘了加星标啊。 ☺
 
 # 使用
 
@@ -147,13 +149,14 @@ docker network rm gitlab-net
 docker volume rm gitlab-config gitlab-datagitlab-logs
 ```
 
-## `testing` 镜像
+## `testing` 和 `master` 镜像
 
-`testing` 镜像是为了帮助翻译项目制作的 GitLab 镜像，它始终使用最新的翻译结果。
+`testing` 镜像以及 `master` 镜像是为了帮助翻译项目测试所制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
-它是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v9.0.4` 标签和 `9-0-stable-zh` 分支的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:9.0.4-ce.0` 进行应用汉化结果进行构建的。
+* `testing` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v9.0.4` 标签和 [`9-0-stable-zh` 分支](https://gitlab.com/xhang/gitlab/tree/9-0-stable-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:9.0.4-ce.0` 应用汉化结果进行构建的。
+* `master` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v9.0.4` 标签和 [`master-zh` 分支](https://gitlab.com/xhang/gitlab/tree/master-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:9.0.4-ce.0` 应用汉化结果进行构建的。
 
-测试镜像将会在 [`9-0-stable-zh` 分支](https://gitlab.com/xhang/gitlab/commits/9-0-stable-zh) 发生改变后 10 分钟内进行镜像构建，从而确保最新的翻译改变可以反映到测试镜像中，方便测试翻译结果。
+测试镜像将会在所对应分支发生改变后数分钟内开始构建镜像，构建成功后，会推送到 [Docker Hub 网站](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，以方便测试，可以随时关注最新的[镜像标签列表](https://hub.docker.com/r/twang2218/gitlab-ce-zh/tags/)中所对应的构建时间。
 
 运行测试镜像和运行其它镜像一样，可以用 `docker-compose` 的方法，也可以用之前最简命令的方法：
 
@@ -162,7 +165,7 @@ docker pull twang2218/gitlab-ce-zh:testing
 docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 ```
 
-需要注意的是，这里的 `docker pull` 是必须的，因为 `testing` 镜像构建比较频繁，需要确保本地镜像是最新的镜像。如果是 `docker-compose`，则执行 `docker-compose pull` 来或取最新镜像。
+> 需要注意的是，这里的 `docker pull` 是必须的，因为测试镜像构建比较频繁，需要确保本地镜像是最新的镜像。如果是 `docker-compose`，则执行 `docker-compose pull` 来或取最新镜像。
 
 ## `build.sh` 构建脚本
 
