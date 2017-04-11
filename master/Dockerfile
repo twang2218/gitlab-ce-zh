@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:9.0.4-ce.0
+FROM gitlab/gitlab-ce:9.0.5-ce.0
 
 ENV GITLAB_VERSION=master-zh
 RUN locale-gen en_US.UTF-8
