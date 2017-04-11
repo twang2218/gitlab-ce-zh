@@ -221,6 +221,11 @@ function detect_and_build() {
     fi
 }
 
+function update() {
+    cd $BASEDIR || return 1
+    git pull
+}
+
 function main() {
     Command=$1
     shift
@@ -235,6 +240,7 @@ function main() {
             prepare_branch master master-zh
             ;;
         detect_and_build)
+            update
             detect_and_build testing
             detect_and_build master
             ;;
