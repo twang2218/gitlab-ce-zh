@@ -9,7 +9,7 @@ function generate() {
     version_latest=${version_9_0}
     testing_version=${version_9_0}
     testing_tag=${testing_version}-ce.0
-    testing_branch=9-0-stable-zh
+    testing_branch=9-1-stable-zh
 
     generate_tag_dockerfile             ${version_8_14}-ce.0    v${version_8_14}    v${version_8_14}-zh     > 8.14/Dockerfile
     generate_tag_dockerfile             ${version_8_15}-ce.0    v${version_8_15}    v${version_8_15}-zh     > 8.15/Dockerfile
