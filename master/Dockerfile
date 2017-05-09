@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:9.0.6-ce.0
+FROM gitlab/gitlab-ce:9.1.0-ce.0
 
 ENV GITLAB_VERSION=master-zh
 RUN set -xe \
