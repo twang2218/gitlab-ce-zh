@@ -1,7 +1,16 @@
-FROM gitlab/gitlab-ce:9.0.5-ce.0
+FROM gitlab/gitlab-ce:9.0.6-ce.0
 
 ENV GITLAB_VERSION=master-zh
-RUN locale-gen en_US.UTF-8
+RUN set -xe \
+    && apt-get update \
+    && apt-get install -yqq locales \
+    && locale-gen en_US.UTF-8 \
+    && apt-get purge -y --auto-remove \
+        -o APT::AutoRemove::RecommendsImportant=false \
+        -o APT::AutoRemove::SuggestsImportant=false \
+        locales \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 
 RUN set -xe \
