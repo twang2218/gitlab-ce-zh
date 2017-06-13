@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:9.2.1-ce.0
+FROM gitlab/gitlab-ce:9.2.2-ce.0
 
 ENV GITLAB_VERSION=9-2-stable-zh
 RUN set -xe \
@@ -26,7 +26,7 @@ RUN set -xe \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
     && REVISION=$(cat /opt/gitlab/embedded/service/gitlab-rails/REVISION) \
-    && git diff --diff-filter=d v9.2.1..origin/9-2-stable-zh -- . ':!spec' ':!features' ':!.gitignore' > ../zh_CN.diff \
+    && git diff --diff-filter=d v9.2.2..origin/9-2-stable-zh -- . ':!spec' ':!features' ':!.gitignore' > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Install missing Gem packages ..." \
