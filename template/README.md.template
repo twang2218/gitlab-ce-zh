@@ -1,10 +1,10 @@
 # 支持的 tags 和对应的 `Dockerfile`
 
-- [`8.15`, `{TAG_8_15}` (*8.15/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.15/Dockerfile)
 - [`8.16`, `{TAG_8_16}` (*8.16/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.16/Dockerfile)
 - [`8.17`, `{TAG_8_17}` (*8.17/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/8.17/Dockerfile)
 - [`9.0`, `{TAG_9_0}` (*9.0/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.0/Dockerfile)
-- [`9.1`, `{TAG_9_1}`, `latest` (*9.1/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.1/Dockerfile)
+- [`9.1`, `{TAG_9_1}` (*9.1/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.1/Dockerfile)
+- [`9.2`, `{TAG_9_2}`, `latest` (*9.2/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.2/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 - [`master` (*master/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/master/Dockerfile)
 

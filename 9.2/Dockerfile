@@ -1,6 +1,6 @@
 FROM gitlab/gitlab-ce:9.2.0-ce.0
 
-ENV GITLAB_VERSION=9-2-stable-zh
+ENV GITLAB_VERSION=v9.2.0
 RUN set -xe \
     && apt-get update \
     && apt-get install -yqq locales \
@@ -10,7 +10,6 @@ RUN set -xe \
         -o APT::AutoRemove::SuggestsImportant=false \
         locales \
     && rm -rf /var/lib/apt/lists/*
-
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 
 RUN set -xe \
@@ -25,13 +24,9 @@ RUN set -xe \
     && cd / \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && REVISION=$(cat /opt/gitlab/embedded/service/gitlab-rails/REVISION) \
-    && git diff --diff-filter=d v9.2.0..origin/9-2-stable-zh -- . ':!spec' ':!features' ':!.gitignore' > ../zh_CN.diff \
+    && git diff v9.2.0..v9.2.0-zh -- . ':!spec' ':!features' ':!.gitignore' > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
-    && echo " # Install missing Gem packages ..." \
-    && cd /opt/gitlab/embedded/service/gitlab-rails \
-    && bundle install \
     && echo " # Regenerating the assets" \
     && cd /opt/gitlab/embedded/service/gitlab-rails \
     && cp config/gitlab.yml.example config/gitlab.yml \

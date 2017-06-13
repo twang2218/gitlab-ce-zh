@@ -38,21 +38,21 @@ function generate_docker_compose_yml() {
 }
 
 function generate_readme() {
-    TAG_8_15=$1
-    TAG_8_16=$2
-    TAG_8_17=$3
-    TAG_9_0=$4
-    TAG_9_1=$5
+    TAG_8_16=$1
+    TAG_8_17=$2
+    TAG_9_0=$3
+    TAG_9_1=$4
+    TAG_9_2=$5
     TAG_LATEST=$6
     TESTING_VERSION=$7
     TESTING_TAG=$8
     TESTING_BRANCH=$9
     cat ./template/README.md.template | sed \
-        -e "s/{TAG_8_15}/${TAG_8_15}/g" \
         -e "s/{TAG_8_16}/${TAG_8_16}/g" \
         -e "s/{TAG_8_17}/${TAG_8_17}/g" \
         -e "s/{TAG_9_0}/${TAG_9_0}/g" \
         -e "s/{TAG_9_1}/${TAG_9_1}/g" \
+        -e "s/{TAG_9_2}/${TAG_9_2}/g" \
         -e "s/{TESTING_VERSION}/${TESTING_VERSION}/g" \
         -e "s/{TESTING_TAG}/${TESTING_TAG}/g" \
         -e "s/{TESTING_BRANCH}/${TESTING_BRANCH}/g" \
@@ -92,7 +92,7 @@ function branch() {
     if [ "$#" != "3" ]; then
         echo "Usage: $0 branch <image-tag> <version-tag> <branch>"
         echo ""
-        echo "  e.g. $0 branch 8.15.0-ce.0 v8.15.0 8-15-stable-zh"
+        echo "  e.g. $0 branch 9.2.0-ce.0 v9.2.0 9-2-stable-zh"
         exit 1
     fi
     TAG=$1
@@ -111,7 +111,7 @@ function tag() {
     if [ "$#" != "2" ]; then
         echo "Usage: $0 tag <image-tag> <version-tag>"
         echo ""
-        echo "  e.g. $0 tag 8.15.0-ce.0 v8.15.0"
+        echo "  e.g. $0 tag 9.2.0-ce.0 v9.2.0"
         exit 1
     fi
     TAG=$1
@@ -138,11 +138,11 @@ function ci() {
         BRANCH="${MAJOR_VERSION}.${MINOR_VERSION}"
         check_build_publish "${BRANCH}" "${TAG}"
     elif [[ "${TRAVIS_BRANCH}" == "master" ]]; then
-        check_build_publish 8.15
         check_build_publish 8.16
         check_build_publish 8.17
         check_build_publish 9.0
         check_build_publish 9.1
+        check_build_publish 9.2
         check_build_publish testing
         check_build_publish master
     else
