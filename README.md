@@ -171,9 +171,35 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 `build.sh` 构建脚本是为了对维护本项目提供支持的脚本。脚本含 5 个子命令，分别为 `branch`、`tag`、`run`、`generate`、`ci`。
 
-其中 `branch`、`tag` 和 `run` 配合使用，可以在不写 `Dockerfile` 的情况下直接生成特定版本、分支的汉化版本镜像。这样方便测试还在开发的分支，或者尚未进入 `twang2218/gitlab-ce-zh` 镜像库的镜像。
+`generate` 和 `ci` 是维护项目所用的命令。
 
-而 `generate` 和 `ci` 是维护项目所用的命令。
+而 `branch`、`tag` 和 `run` 配合使用，可以在不写 `Dockerfile` 的情况下直接生成特定版本、分支的汉化版本镜像。这样方便测试还在开发的分支，或者尚未进入 `twang2218/gitlab-ce-zh` 镜像库的镜像。
+
+### `generate` - 生成 Dockerfile
+
+各个小版本分支的 `Dockerfile`，如 `9.3/Dockerfile` 等，都是使用 `generate` 命令生成的。因此只需要更新 `build-version.sh` 中的相关变量就可以完成各个版本镜像的升级。
+
+* 大多数补丁版本的更新只需要修改 `VERSIONS` 变量即可；
+* 如果添加新的分支，需要注意同时删除旧的分支，包括 `VERSIONS` 变量旧的版本，以及目录文件；
+* GitLab 官方镜像有时会出现同一个版本补发一个新的镜像，版本号不变，但是后缀会变化，此时不要忘记修改 `APPENDIX` 变量；
+
+修改后，只需要重新生成所有文件：
+
+```bash
+./build.sh generate
+```
+
+执行之后，可以 `git diff` 查看实际变更情况。
+
+在提交前，建议先测试新的 `Dockerfile` 是否可以正确构建。
+
+### `ci` - 持续集成脚本
+
+`ci` 命令是为了持续集成服务准备的，现在支持 [Travis CI](https://travis-ci.org/)。
+
+在 Travis CI 被触发后，会调用 `./build.sh ci` 命令。该命令会根据环境变量情况决定是整体各个分支检查、构建、发布，还是针对某个标签检查、构建、发布。
+
+镜像构建成功后，会自动发布到 Docker Hub。这种方式比直接使用 Docker Hub 中的正则匹配要灵活。
 
 ### `branch` - 构建某个汉化分支的镜像
 
@@ -205,24 +231,6 @@ CONTAINER ID        IMAGE                         COMMAND             CREATED   
 ```
 
 从 `docker ps` 的结果可以看出，该运行的容器的 `80` 端口映射到了宿主的 `32775` 端口，因此访问 `http://<主机IP>:32775` 就可以看到运行结果。*初次启动会比较慢，要耐心等待。*
-
-### `generate` - 生成 Dockerfile
-
-各个小版本分支的 `Dockerfile`，如 `8.15/Dockerfile` 等，都是使用 `generate` 命令生成的。因此只需要更新 `build.sh` 中的 `generate()` 函数就可以完成各个版本镜像的升级，当然，`README.md` 还需要手动更新。
-
-```bash
-./build.sh generate
-```
-
-执行之后，可以 `git diff` 查看实际变更情况。
-
-### `ci` - 持续集成脚本
-
-`ci` 命令是为了持续集成服务准备的，现在支持 [Travis CI](https://travis-ci.org/)。
-
-在 Travis CI 被触发后，会调用 `./build.sh ci` 命令。该命令会根据环境变量情况决定是整体各个分支检查、构建、发布，还是针对某个标签检查、构建、发布。
-
-镜像构建成功后，会自动发布到 Docker Hub。这种方式比直接使用 Docker Hub 中的正则匹配要灵活。
 
 ## 注意事项
 

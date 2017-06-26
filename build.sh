@@ -38,26 +38,49 @@ function generate_docker_compose_yml() {
 }
 
 function generate_readme() {
-    TAG_8_17=$1
-    TAG_9_0=$2
-    TAG_9_1=$3
-    TAG_9_2=$4
-    TAG_9_3=$5
-    TAG_LATEST=$6
-    TESTING_VERSION=$7
-    TESTING_TAG=$8
-    TESTING_BRANCH=$9
+    TAG_LATEST=$1
+    TESTING_VERSION=$2
+    TESTING_TAG=$3
+    TESTING_BRANCH=$4
     cat ./template/README.md.template | sed \
-        -e "s/{TAG_8_17}/${TAG_8_17}/g" \
-        -e "s/{TAG_9_0}/${TAG_9_0}/g" \
-        -e "s/{TAG_9_1}/${TAG_9_1}/g" \
-        -e "s/{TAG_9_2}/${TAG_9_2}/g" \
-        -e "s/{TAG_9_3}/${TAG_9_3}/g" \
+        -e "s/{TAG_1}/${VERSIONS[0]}/g" \
+        -e "s/{TAG_2}/${VERSIONS[1]}/g" \
+        -e "s/{TAG_3}/${VERSIONS[2]}/g" \
+        -e "s/{TAG_4}/${VERSIONS[3]}/g" \
+        -e "s/{TAG_5}/${VERSIONS[4]}/g" \
+        -e "s/{BRANCH_1}/${VERSIONS[0]%.*}/g" \
+        -e "s/{BRANCH_2}/${VERSIONS[1]%.*}/g" \
+        -e "s/{BRANCH_3}/${VERSIONS[2]%.*}/g" \
+        -e "s/{BRANCH_4}/${VERSIONS[3]%.*}/g" \
+        -e "s/{BRANCH_5}/${VERSIONS[4]%.*}/g" \
         -e "s/{TESTING_VERSION}/${TESTING_VERSION}/g" \
         -e "s/{TESTING_TAG}/${TESTING_TAG}/g" \
         -e "s/{TESTING_BRANCH}/${TESTING_BRANCH}/g" \
         -e "s/{TAG_LATEST}/${TAG_LATEST}/g" \
         -e "/{COMPOSE_EXAMPLE}/ {r docker-compose.yml" -e "d" -e "}"
+}
+
+function generate() {
+    version_latest=${VERSIONS[4]}
+    testing_version=${VERSIONS[4]}
+    testing_tag=${testing_version}${APPENDIX[4]}
+    testing_branch=${BRANCHES[4]/./-}-stable-zh
+
+    for i in `seq 0 4`
+    do
+        "${GENERATORS[$i]}"     "${VERSIONS[$i]}${APPENDIX[$i]}"    "v${VERSIONS[$i]}"  "v${VERSIONS[$i]}-zh"   >   "${BRANCHES[$i]}/Dockerfile"
+    done
+    generate_branch_v8_17_dockerfile    "${testing_tag}"          "v${testing_version}"     "${testing_branch}" >   testing/Dockerfile
+    generate_branch_v8_17_dockerfile    "${testing_tag}"          '$REVISION'               master-zh           >   master/Dockerfile
+
+    generate_docker_compose_yml         "${version_latest}"       > docker-compose.yml
+
+    generate_readme \
+        "${version_latest}" \
+        "${testing_version}" \
+        "${testing_tag}" \
+        "${testing_branch}" \
+        > README.md
 }
 
 function build_and_publish() {
@@ -138,11 +161,9 @@ function ci() {
         BRANCH="${MAJOR_VERSION}.${MINOR_VERSION}"
         check_build_publish "${BRANCH}" "${TAG}"
     elif [[ "${TRAVIS_BRANCH}" == "master" ]]; then
-        check_build_publish 8.17
-        check_build_publish 9.0
-        check_build_publish 9.1
-        check_build_publish 9.2
-        check_build_publish 9.3
+        for b in ${BRANCHES}; do
+            check_build_publish "$b"
+        done
         check_build_publish testing
         check_build_publish master
     else
