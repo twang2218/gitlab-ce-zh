@@ -3,6 +3,7 @@ FROM gitlab/gitlab-ce:{TAG}
 ENV GITLAB_VERSION={VERSION}
 RUN locale-gen en_US.UTF-8
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+ENV TZ=Asia/Shanghai
 
 RUN set -xe \
     && cd / \
