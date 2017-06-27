@@ -139,7 +139,7 @@ function ci() {
         local branch="${tag%.*}"
         check_build_publish $branch $tag
     elif [[ "${TRAVIS_BRANCH}" == "master" ]]; then
-        for b in ${BRANCHES}; do
+        for b in ${BRANCHES[@]}; do
             check_build_publish $b
         done
         check_build_publish testing
