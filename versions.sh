@@ -3,10 +3,10 @@
 #  Zero-based array
 export VERSIONS=(
     8.17.7
-    9.0.11
-    9.1.8
+    9.0.12
+    9.1.9
     9.2.8
-    9.3.8
+    9.3.9
 )
 
 export APPENDIX=(
