@@ -26,3 +26,7 @@ export GENERATORS=(
 )
 
 export BRANCHES=($(for v in ${VERSIONS[@]}; do echo -n "${v%.*} "; done))
+
+export BRANCHES_LATEST=9.3
+export VERSION_LATEST=9.3.9
+export APPENDIX_LATEST=-ce.0

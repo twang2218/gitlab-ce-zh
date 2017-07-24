@@ -46,13 +46,15 @@ function generate_readme() {
 }
 
 function generate() {
-    local version_latest=${VERSIONS[4]}
-    local testing_version=${VERSIONS[4]}
-    local testing_tag=${testing_version}${APPENDIX[4]}
-    local testing_branch=${BRANCHES[4]/./-}-stable-zh
+    local version_latest=${VERSION_LATEST}
+    local testing_version=${VERSION_LATEST}
+    local testing_tag=${VERSION_LATEST}${APPENDIX_LATEST}
+    local testing_branch=${BRANCHES_LATEST/./-}-stable-zh
+    local number_of_version=${#VERSIONS[@]}
 
-    for i in `seq 0 4`
+    for i in `seq 0 $(expr $number_of_version - 1)`
     do
+        mkdir -p "${BRANCHES[$i]}"
         "${GENERATORS[$i]}"     "${VERSIONS[$i]}${APPENDIX[$i]}"    "v${VERSIONS[$i]}"  "v${VERSIONS[$i]}-zh"   >   "${BRANCHES[$i]}/Dockerfile"
     done
     generate_branch_v8_17_dockerfile    "${testing_tag}"          "v${testing_version}"     "${testing_branch}" >   testing/Dockerfile
@@ -235,7 +237,7 @@ function main() {
         run)        run "$@" ;;
         ci)         ci ;;
         prepare)
-            prepare_branch testing  "${BRANCHES[4]/./-}-stable-zh"
+            prepare_branch testing  "${BRANCHES_LATEST/./-}-stable-zh"
             prepare_branch master   master-zh
             ;;
         detect_and_build)
