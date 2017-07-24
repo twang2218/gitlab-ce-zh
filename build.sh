@@ -129,8 +129,8 @@ function tag() {
 }
 
 # Version related functions, such as 'generate()' are put in separate file.
-# shellcheck source=./build-version.sh
-source $BASEDIR/build-version.sh
+# shellcheck source=./versions.sh
+source $BASEDIR/versions.sh
 
 function ci() {
     env | grep TRAVIS
