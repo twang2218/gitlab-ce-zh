@@ -1,6 +1,6 @@
-FROM gitlab/gitlab-ce:8.17.7-ce.0
+FROM gitlab/gitlab-ce:9.4.0-rc3.ce.0
 
-ENV GITLAB_VERSION=v8.17.7
+ENV GITLAB_VERSION=v9.4.0-rc3
 RUN set -xe \
     && apt-get update \
     && apt-get install -yqq locales \
@@ -27,7 +27,7 @@ RUN set -xe \
     && cd / \
     && git clone https://gitlab.com/xhang/gitlab.git \
     && cd gitlab \
-    && git diff v8.17.7..v8.17.7-zh -- . ':!spec' ':!features' ':!.gitignore' > ../zh_CN.diff \
+    && git diff v9.4.0-rc3..v9.4.0-rc3-zh -- . ':!spec' ':!features' ':!.gitignore' > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
     && echo " # Regenerating the assets" \

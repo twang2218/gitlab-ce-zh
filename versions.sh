@@ -7,6 +7,7 @@ export VERSIONS=(
     9.1.9
     9.2.8
     9.3.9
+    9.4.0-rc3
 )
 
 export APPENDIX=(
@@ -15,9 +16,11 @@ export APPENDIX=(
     '-ce.0'
     '-ce.0'
     '-ce.0'
+    '.ce.0'
 )
 
 export GENERATORS=(
+    generate_tag_v8_17_dockerfile
     generate_tag_v8_17_dockerfile
     generate_tag_v8_17_dockerfile
     generate_tag_v8_17_dockerfile
