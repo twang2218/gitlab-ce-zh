@@ -2,11 +2,11 @@
 
 #  Zero-based array
 export VERSIONS=(
-    8.17.6
-    9.0.10
-    9.1.7
-    9.2.7
-    9.3.7
+    8.17.7
+    9.0.11
+    9.1.8
+    9.2.8
+    9.3.8
 )
 
 export APPENDIX=(
