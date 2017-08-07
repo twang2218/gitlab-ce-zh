@@ -6,6 +6,10 @@ if [[ -z "${DOCKER_USERNAME}" ]]; then
     DOCKER_USERNAME=twang2218
 fi
 
+# Version related functions, such as 'generate()' are put in separate file.
+# shellcheck source=./versions.sh
+source $BASEDIR/versions.sh
+
 function generate_branch_dockerfile() {
     cat ./template/Dockerfile.branch.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g; s:{BRANCH}:$3:g"
 }
@@ -130,9 +134,6 @@ function tag() {
     docker images ${DOCKER_USERNAME}/gitlab-ce-zh
 }
 
-# Version related functions, such as 'generate()' are put in separate file.
-# shellcheck source=./versions.sh
-source $BASEDIR/versions.sh
 
 function ci() {
     env | grep TRAVIS
