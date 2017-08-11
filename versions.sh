@@ -4,7 +4,7 @@
 # Unless there is an extra version branch for testing, such as, '-rc'
 #  Zero-based array
 export VERSIONS=(
-    9.0.12
+    9.0.13
     9.1.10
     9.2.10
     9.3.10
