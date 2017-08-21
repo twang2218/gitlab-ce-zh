@@ -62,7 +62,6 @@ function generate() {
         "${GENERATORS[$i]}"     "${VERSIONS[$i]}${APPENDIX[$i]}"    "v${VERSIONS[$i]}"  "v${VERSIONS[$i]}-zh"   >   "${BRANCHES[$i]}/Dockerfile"
     done
     generate_branch_v8_17_dockerfile    "${testing_tag}"          "v${testing_version}"     "${testing_branch}" >   testing/Dockerfile
-    generate_branch_v8_17_dockerfile    "${testing_tag}"          '$REVISION'               master-zh           >   master/Dockerfile
     generate_docker_compose_yml         "${version_latest}"       > docker-compose.yml
     generate_readme "${version_latest}" "${testing_version}" "${testing_tag}" "${testing_branch}" > README.md
 }
@@ -146,7 +145,6 @@ function ci() {
             check_build_publish $b
         done
         check_build_publish testing
-        check_build_publish master
     else
         echo "Not in CI."
     fi
@@ -239,12 +237,10 @@ function main() {
         ci)         ci ;;
         prepare)
             prepare_branch testing  "${BRANCHES_LATEST/./-}-stable-zh"
-            prepare_branch master   master-zh
             ;;
         detect_and_build)
             update
             detect_and_build testing
-            detect_and_build master
             ;;
         *)          echo "Usage: $0 <branch|tag|generate|run|ci|prepare|detect_and_build>" ;;
     esac

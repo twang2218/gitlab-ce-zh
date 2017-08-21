@@ -6,7 +6,6 @@
 - [`9.3`, `9.3.10` (*9.3/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.3/Dockerfile)
 - [`9.4`, `9.4.5`, `latest` (*9.4/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.4/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
-- [`master` (*master/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/master/Dockerfile)
 
 [![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
 [![Image Layers and Size](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh)
@@ -149,12 +148,11 @@ docker network rm gitlab-net
 docker volume rm gitlab-config gitlab-datagitlab-logs
 ```
 
-## `testing` 和 `master` 镜像
+## `testing` 镜像
 
-`testing` 镜像以及 `master` 镜像是为了帮助翻译项目测试所制作的 GitLab 镜像，它始终使用最新的翻译结果。
+`testing` 镜像是为了帮助翻译项目测试所制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
 * `testing` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v9.4.5` 标签和 [`9-4-stable-zh` 分支](https://gitlab.com/xhang/gitlab/tree/9-4-stable-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:9.4.5-ce.0` 应用汉化结果进行构建的。
-* `master` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v9.4.5` 标签和 [`master-zh` 分支](https://gitlab.com/xhang/gitlab/tree/master-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:9.4.5-ce.0` 应用汉化结果进行构建的。
 
 测试镜像将会在所对应分支发生改变后数分钟内开始构建镜像，构建成功后，会推送到 [Docker Hub 网站](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，以方便测试，可以随时关注最新的[镜像标签列表](https://hub.docker.com/r/twang2218/gitlab-ce-zh/tags/)中所对应的构建时间。
 
