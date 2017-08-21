@@ -1,42 +1,47 @@
 FROM gitlab/gitlab-ce:9.4.5-ce.0
 
 ENV GITLAB_VERSION=9-4-stable-zh
+
 RUN set -xe \
+    && export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
-    && apt-get install -yqq locales \
+    && apt-get install -yqq locales tzdata \
     && locale-gen en_US.UTF-8 \
-    && apt-get purge -y --auto-remove \
-        -o APT::AutoRemove::RecommendsImportant=false \
-        -o APT::AutoRemove::SuggestsImportant=false \
-        locales \
     && rm -rf /var/lib/apt/lists/*
 
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 ENV TZ=Asia/Shanghai
 
+ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
+ENV GITLAB_ZH_GIT=https://gitlab.com/xhang/gitlab.git
+
 RUN set -xe \
     && echo " # Preparing ..." \
+    && export DEBIAN_FRONTEND=noninteractive \
     && export SSL_CERT_DIR=/etc/ssl/certs/ \
     && export GIT_SSL_CAPATH=/etc/ssl/certs/ \
     && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && buildDeps='lsb-release patch nodejs python build-essential yarn cmake' \
+    && export buildDeps='lsb-release patch nodejs python build-essential yarn cmake' \
     && apt-get install -yqq $buildDeps \
     && echo " # Generating translation patch ..." \
-    && cd / \
-    && git clone https://gitlab.com/xhang/gitlab.git \
+    && cd /tmp \
+    && git clone ${GITLAB_ZH_GIT} gitlab \
     && cd gitlab \
-    && REVISION=$(cat /opt/gitlab/embedded/service/gitlab-rails/REVISION) \
-    && git diff --diff-filter=d v9.4.5..origin/9-4-stable-zh -- . ':!spec' ':!features' ':!.gitignore' > ../zh_CN.diff \
+    && export REVISION=$(cat ${GITLAB_DIR}/REVISION) \
+    && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
+    && git diff --diff-filter=d v9.4.5..origin/9-4-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
-    && patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../zh_CN.diff \
+    && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
+    && echo " # Copy locale files ..." \
+    && cp -R locale ${GITLAB_DIR}/ \
     && echo " # Install missing Gem packages ..." \
-    && cd /opt/gitlab/embedded/service/gitlab-rails \
+    && cd ${GITLAB_DIR} \
     && bundle install \
     && echo " # Regenerating the assets" \
-    && cd /opt/gitlab/embedded/service/gitlab-rails \
+    && cd ${GITLAB_DIR} \
     && cp config/gitlab.yml.example config/gitlab.yml \
     && cp config/database.yml.postgresql config/database.yml \
     && cp config/secrets.yml.example config/secrets.yml \
@@ -63,4 +68,4 @@ RUN set -xe \
         -o APT::AutoRemove::SuggestsImportant=false \
         $buildDeps \
     && find /usr/lib/ -name __pycache__ | xargs rm -rf \
-    && rm -rf /gitlab /*.diff /root/.cache /var/lib/apt/lists/*
+    && rm -rf /tmp/gitlab /tmp/*.diff /root/.cache /var/lib/apt/lists/*
