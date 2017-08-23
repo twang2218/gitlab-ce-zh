@@ -1,6 +1,6 @@
-FROM gitlab/gitlab-ce:9.4.5-ce.0
+FROM gitlab/gitlab-ce:9.5.0-ce.0
 
-ENV GITLAB_VERSION=9-4-stable-zh
+ENV GITLAB_VERSION=9-5-stable-zh
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -32,7 +32,7 @@ RUN set -xe \
     && cd gitlab \
     && export REVISION=$(cat ${GITLAB_DIR}/REVISION) \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
-    && git diff --diff-filter=d v9.4.5..origin/9-4-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff --diff-filter=d v9.5.0..origin/9-5-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy locale files ..." \
