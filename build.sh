@@ -26,6 +26,10 @@ function generate_tag_v8_17_dockerfile() {
     cat ./template/Dockerfile.tag.v8.17.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g;"
 }
 
+function generate_tag_v10_dockerfile() {
+    cat ./template/Dockerfile.tag.v10.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g;"
+}
+
 function generate_docker_compose_yml() {
     cat ./template/docker-compose.yml.template | sed "s:{TAG_LATEST}:$1:g"
 }

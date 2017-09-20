@@ -2,3 +2,4 @@
 gitlab/*
 gitlab-*
 *.log
+tmp
