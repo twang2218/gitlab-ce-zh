@@ -3,7 +3,7 @@
 - [`9.2`, `9.2.10` (*9.2/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.2/Dockerfile)
 - [`9.3`, `9.3.11` (*9.3/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.3/Dockerfile)
 - [`9.4`, `9.4.6` (*9.4/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.4/Dockerfile)
-- [`9.5`, `9.5.7` (*9.5/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.5/Dockerfile)
+- [`9.5`, `9.5.8` (*9.5/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.5/Dockerfile)
 - [`10.0`, `10.0.0`, `latest` (*10.0/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.0/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
