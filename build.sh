@@ -10,12 +10,12 @@ fi
 # shellcheck source=./versions.sh
 source $BASEDIR/versions.sh
 
-function generate_branch_dockerfile() {
-    cat ./template/Dockerfile.branch.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g; s:{BRANCH}:$3:g"
-}
-
 function generate_branch_v8_17_dockerfile() {
     cat ./template/Dockerfile.branch.v8.17.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g; s:{BRANCH}:$3:g"
+}
+
+function generate_branch_v10_dockerfile() {
+    cat ./template/Dockerfile.branch.v10.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g; s:{BRANCH}:$3:g"
 }
 
 function generate_tag_dockerfile() {
@@ -65,7 +65,7 @@ function generate() {
         mkdir -p "${BRANCHES[$i]}"
         "${GENERATORS[$i]}"     "${VERSIONS[$i]}${APPENDIX[$i]}"    "v${VERSIONS[$i]}"  "v${VERSIONS[$i]}-zh"   >   "${BRANCHES[$i]}/Dockerfile"
     done
-    generate_branch_v8_17_dockerfile    "${testing_tag}"          "v${testing_version}"     "${testing_branch}" >   testing/Dockerfile
+    generate_branch_v10_dockerfile    "${testing_tag}"          "v${testing_version}"     "${testing_branch}" >   testing/Dockerfile
     generate_docker_compose_yml         "${version_latest}"       > docker-compose.yml
     generate_readme "${version_latest}" "${testing_version}" "${testing_tag}" "${testing_branch}" > README.md
 }

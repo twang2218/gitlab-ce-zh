@@ -46,7 +46,8 @@ RUN set -xe \
     && cp config/database.yml.postgresql config/database.yml \
     && cp config/secrets.yml.example config/secrets.yml \
     && rm -rf public/assets \
-    && yarn install --pure-lockfile \
+    && rm -rf yarn.lock \
+    && yarn install --production --force \
     && RAILS_ENV=production \
         NO_PRIVILEGE_DROP=true \
         USE_DB=false \
