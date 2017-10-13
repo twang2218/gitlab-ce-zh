@@ -4,7 +4,6 @@
 # Unless there is an extra version branch for testing, such as, '-rc'
 #  Zero-based array
 export VERSIONS=(
-    9.1.10
     9.2.10
     9.3.11
     9.4.6
@@ -18,11 +17,9 @@ export APPENDIX=(
     '-ce.0'
     '-ce.0'
     '-ce.0'
-    '-ce.0'
 )
 
 export GENERATORS=(
-    generate_tag_v8_17_dockerfile
     generate_tag_v8_17_dockerfile
     generate_tag_v8_17_dockerfile
     generate_tag_v8_17_dockerfile
