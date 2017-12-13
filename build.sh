@@ -210,7 +210,7 @@ function trigger_build() {
         --header "Content-Type: application/json" \
         --request POST \
         --data "{\"docker_tag\": \"$tag\"}" \
-        https://registry.hub.docker.com/u/twang2218/gitlab-ce-zh/trigger/f78a6063-8c23-4997-b925-92c8093b5e83/
+        ${DOCKER_TRIGGER_LINK}
     echo -e "\ndone."
 }
 
