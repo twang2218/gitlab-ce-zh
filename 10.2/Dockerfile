@@ -1,6 +1,6 @@
 FROM gitlab/gitlab-ce:10.2.4-ce.0
 
-ENV GITLAB_VERSION=10-2-stable-zh
+ENV GITLAB_VERSION=v10.2.4
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -31,16 +31,12 @@ RUN set -xe \
     && cd /tmp \
     && git clone ${GITLAB_ZH_GIT} gitlab \
     && cd gitlab \
-    && export REVISION=$(cat ${GITLAB_DIR}/REVISION) \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
-    && git diff --diff-filter=d v10.2.4..origin/10-2-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff v10.2.4..v10.2.4-zh -- .  ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy locale files ..." \
     && cp -R locale ${GITLAB_DIR}/ \
-    && echo " # Install missing Gem packages ..." \
-    && cd ${GITLAB_DIR} \
-    && bundle install \
     && echo " # Regenerating the assets" \
     && cd ${GITLAB_DIR} \
     && cp config/gitlab.yml.example config/gitlab.yml \
