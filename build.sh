@@ -74,11 +74,11 @@ function build_and_publish() {
     local branch=$1
     local tag=$2
     set -xe
-    docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:$tag" $branch
+    docker build -t "${DOCKER_NAMESPACE}/gitlab-ce-zh:$tag" $branch
     if [[ -n "${DOCKER_PASSWORD}" ]]; then
-        echo "Publish image '${DOCKER_USERNAME}/gitlab-ce-zh:$tag' to Docker Hub ..."
+        echo "Publish image '${DOCKER_NAMESPACE}/gitlab-ce-zh:$tag' to Docker Hub ..."
         docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
-        docker push "${DOCKER_USERNAME}/gitlab-ce-zh:$tag"
+        docker push "${DOCKER_NAMESPACE}/gitlab-ce-zh:$tag"
     fi
     set +xe
 }
@@ -88,10 +88,10 @@ function check_build_publish() {
     local tag=$2
 
     if [[ -n "$tag" ]]; then
-        echo "Found tag $tag, building ${DOCKER_USERNAME}/gitlab-ce-zh:$tag ..."
+        echo "Found tag $tag, building ${DOCKER_NAMESPACE}/gitlab-ce-zh:$tag ..."
         build_and_publish $branch $tag
     elif (git show --pretty="" --name-only | grep Dockerfile | grep -q $branch); then
-        echo "$branch has been updated, rebuilding ${DOCKER_USERNAME}/gitlab-ce-zh:$branch ..."
+        echo "$branch has been updated, rebuilding ${DOCKER_NAMESPACE}/gitlab-ce-zh:$branch ..."
         build_and_publish $branch $branch
     else
         echo "Nothing changed in $branch."
@@ -112,10 +112,10 @@ function branch() {
 
     Dockerfile=$(generate_branch_v8_17_dockerfile $tag $version $branch)
     echo "$Dockerfile"
-    echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:$branch" -
+    echo "$Dockerfile" | docker build -t "${DOCKER_NAMESPACE}/gitlab-ce-zh:$branch" -
     echo ""
     echo "List of available images:"
-    docker images ${DOCKER_USERNAME}/gitlab-ce-zh
+    docker images ${DOCKER_NAMESPACE}/gitlab-ce-zh
 }
 
 function tag() {
@@ -131,10 +131,10 @@ function tag() {
 
     Dockerfile=$(generate_tag_v8_17_dockerfile $tag $version)
     echo "$Dockerfile"
-    echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${version:1}" -
+    echo "$Dockerfile" | docker build -t "${DOCKER_NAMESPACE}/gitlab-ce-zh:${version:1}" -
     echo ""
     echo "List of available images:"
-    docker images ${DOCKER_USERNAME}/gitlab-ce-zh
+    docker images ${DOCKER_NAMESPACE}/gitlab-ce-zh
 }
 
 
@@ -160,7 +160,7 @@ function ci() {
         set +xe
     fi
 
-    docker images "${DOCKER_USERNAME}/gitlab-ce-zh"
+    docker images "${DOCKER_NAMESPACE}/gitlab-ce-zh"
 }
 
 function run() {
@@ -168,12 +168,12 @@ function run() {
         echo "Usage: $0 run <image-tag>"
         echo ""
         echo "List of available images:"
-        docker images ${DOCKER_USERNAME}/gitlab-ce-zh
+        docker images ${DOCKER_NAMESPACE}/gitlab-ce-zh
         exit 1
     fi
     TAG=$1
     set -xe
-    docker run -d -P ${DOCKER_USERNAME}/gitlab-ce-zh:${TAG}
+    docker run -d -P ${DOCKER_NAMESPACE}/gitlab-ce-zh:${TAG}
     docker ps
 }
 
