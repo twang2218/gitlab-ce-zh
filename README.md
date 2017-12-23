@@ -7,8 +7,8 @@
 - [`10.2`, `10.2.5`, `latest` (*10.2/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.2/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
-[![Build Status](https://travis-ci.org/gitclub/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/gitclub/gitlab-ce-zh)
-[![Image Layers and Size](https://images.microbadger.com/badges/image/gitclub/gitlab-ce-zh.svg)](http://microbadger.com/images/gitclub/gitlab-ce-zh)
+[![Build Status](https://travis-ci.org/gitlab-ce-zh/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/gitlab-ce-zh/gitlab-ce-zh)
+[![](https://images.microbadger.com/badges/image/gitclub/gitlab-ce-zh.svg)](https://microbadger.com/images/gitclub/gitlab-ce-zh "Get your own image badge on microbadger.com")
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/gitlab-ce-zh/gitlab-ce-zh)
 
 # GitLab 中文社区版
@@ -206,7 +206,7 @@ docker run -d -p 3000:80 gitclub/gitlab-ce-zh:testing
 
 例如：`./build.sh branch 10.2.5-ce.0 v10.2.5 8-15-stable-zh`
 
-这表明将使用 `gitlab/gitlab-ce:10.2.5-ce.0` 做为基础镜像，并且使用上游版本标签 `v10.2.5` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `twang2218/gitlab-ce-zh:8-15-stable-zh` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:10.2.5-ce.0` 做为基础镜像，并且使用上游版本标签 `v10.2.5` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `gitclub/gitlab-ce-zh:8-15-stable-zh` 的镜像。
 
 ### `tag` - 构建某个汉化标签的镜像
 
