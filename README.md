@@ -51,7 +51,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:10.2.5'
+      image: 'gitclub/gitlab-ce-zh:10.2.5'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
