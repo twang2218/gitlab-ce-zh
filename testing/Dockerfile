@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:10.3.0-ce.0
+FROM gitlab/gitlab-ce:10.3.1-ce.0
 
 ENV GITLAB_VERSION=10-3-stable-zh
 
@@ -33,7 +33,7 @@ RUN set -xe \
     && cd gitlab \
     && export REVISION=$(cat ${GITLAB_DIR}/REVISION) \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
-    && git diff --diff-filter=d v10.3.0..origin/10-3-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff --diff-filter=d v10.3.1..origin/10-3-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy locale files ..." \
