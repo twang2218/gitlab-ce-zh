@@ -4,7 +4,7 @@
 - [`10.0`, `10.0.6` (*10.0/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.0/Dockerfile)
 - [`10.1`, `10.1.4` (*10.1/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.1/Dockerfile)
 - [`10.2`, `10.2.5` (*10.2/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.2/Dockerfile)
-- [`10.3`, `10.3.1`, `latest` (*10.3/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.3/Dockerfile)
+- [`10.3`, `10.3.2`, `latest` (*10.3/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.3/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
 [![Build Status](https://travis-ci.org/gitlab-ce-zh/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/gitlab-ce-zh/gitlab-ce-zh)
@@ -28,10 +28,10 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 gitclub/gitlab-ce-zh:10.3.1
+docker run -d -p 3000:80 gitclub/gitlab-ce-zh:10.3.2
 ```
 
-*可以将 `10.3.1` 换成你所需要的版本标签。*
+*可以将 `10.3.2` 换成你所需要的版本标签。*
 
 启动后就可以通过主机的 `3000` 端口看到运行结果了，比如用的是本机 Docker 的话，访问：<http://localhost:3000> 即可。
 
@@ -51,7 +51,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'gitclub/gitlab-ce-zh:10.3.1'
+      image: 'gitclub/gitlab-ce-zh:10.3.2'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -124,7 +124,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    gitclub/gitlab-ce-zh:10.3.1
+    gitclub/gitlab-ce-zh:10.3.2
 ```
 
 如果需要进入容器修改配置文件，可以用 `docker exec` 命令进入容器：
@@ -153,7 +153,7 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 `testing` 镜像是为了帮助翻译项目测试所制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
-* `testing` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v10.3.1` 标签和 [`10-3-stable-zh` 分支](https://gitlab.com/xhang/gitlab/tree/10-3-stable-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:10.3.1-ce.0` 应用汉化结果进行构建的。
+* `testing` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v10.3.2` 标签和 [`10-3-stable-zh` 分支](https://gitlab.com/xhang/gitlab/tree/10-3-stable-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:10.3.2-ce.0` 应用汉化结果进行构建的。
 
 测试镜像将会在所对应分支发生改变后数分钟内开始构建镜像，构建成功后，会推送到 [Docker Hub 网站](https://hub.docker.com/r/gitclub/gitlab-ce-zh/)，以方便测试，可以随时关注最新的[镜像标签列表](https://hub.docker.com/r/gitclub/gitlab-ce-zh/tags/)中所对应的构建时间。
 
@@ -204,25 +204,25 @@ docker run -d -p 3000:80 gitclub/gitlab-ce-zh:testing
 
 格式为：`./build.sh branch <基础镜像标签> <英文版本标签> <汉化版本分支>`
 
-例如：`./build.sh branch 10.3.1-ce.0 v10.3.1 8-15-stable-zh`
+例如：`./build.sh branch 10.3.2-ce.0 v10.3.2 8-15-stable-zh`
 
-这表明将使用 `gitlab/gitlab-ce:10.3.1-ce.0` 做为基础镜像，并且使用上游版本标签 `v10.3.1` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `gitclub/gitlab-ce-zh:8-15-stable-zh` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:10.3.2-ce.0` 做为基础镜像，并且使用上游版本标签 `v10.3.2` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `gitclub/gitlab-ce-zh:8-15-stable-zh` 的镜像。
 
 ### `tag` - 构建某个汉化标签的镜像
 
 格式为：`./build.sh tag <基础镜像标签> <英文版本标签>`
 
-例如： `./build.sh tag 10.3.1-ce.0 v10.3.1`
+例如： `./build.sh tag 10.3.2-ce.0 v10.3.2`
 
-这表明将使用 `gitlab/gitlab-ce:10.3.1-ce.0` 镜像为基础镜像，以 `v10.3.1` 为基础对比版本，以 `v10.3.1-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `gitclub/gitlab-ce-zh:10.3.1` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:10.3.2-ce.0` 镜像为基础镜像，以 `v10.3.2` 为基础对比版本，以 `v10.3.2-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `gitclub/gitlab-ce-zh:10.3.2` 的镜像。
 
 ### `run` - 运行某个构建好的镜像
 
 格式为：`./build.sh <镜像标签>`
 
-例如： `./build.sh run 10.3.1`
+例如： `./build.sh run 10.3.2`
 
-这将会以命令 `docker run -d -P gitlab-ce-zh/gitlab-ce-zh:10.3.1` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
+这将会以命令 `docker run -d -P gitlab-ce-zh/gitlab-ce-zh:10.3.2` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
 
 ```bash
 CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                                                  NAMES

@@ -15,6 +15,7 @@ ENV TZ=Asia/Shanghai
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_ZH_GIT=https://gitlab.com/xhang/gitlab.git
 
+# Reference: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/config/software/gitlab-rails.rb
 RUN set -xe \
     && echo " # Preparing ..." \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -44,11 +45,18 @@ RUN set -xe \
     && rm -rf public/assets \
     && rm -rf yarn.lock node_modules \
     && yarn install \
-    && RAILS_ENV=production \
-        NO_PRIVILEGE_DROP=true \
-        USE_DB=false \
-        SKIP_STORAGE_VALIDATION=true \
-        bundle exec rake gitlab:assets:compile \
+    && export NODE_ENV=production \
+    && export RAILS_ENV=production \
+    && export SETUP_DB=false \
+    && export USE_DB=false \
+    && export SKIP_STORAGE_VALIDATION=true \
+    && export WEBPACK_REPORT=true \
+    && export NO_COMPRESSION=true \
+    && export NO_PRIVILEGE_DROP=true \
+    && bundle exec rake gettext:compile \
+    && bundle exec rake gitlab:assets:compile \
+    && echo " # Cleaning ..." \
+    && yarn cache clean \
     && rm -rf log \
         tmp \
         config/gitlab.yml \
@@ -58,8 +66,6 @@ RUN set -xe \
         .gitlab_shell_secret \
         .gitlab_workhorse_secret \
         node_modules \
-    && echo " # Cleaning ..." \
-    && yarn cache clean \
     && apt-get purge -y --auto-remove \
         -o APT::AutoRemove::RecommendsImportant=false \
         -o APT::AutoRemove::SuggestsImportant=false \
