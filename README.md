@@ -1,22 +1,23 @@
 # 支持的 tags 和对应的 `Dockerfile`
 
-- [`9.2`, `9.2.10` (*9.2/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.2/Dockerfile)
-- [`9.3`, `9.3.11` (*9.3/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.3/Dockerfile)
-- [`9.4`, `9.4.6` (*9.4/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.4/Dockerfile)
-- [`9.5`, `9.5.8` (*9.5/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.5/Dockerfile)
-- [`10.0`, `10.0.3`, `latest` (*10.0/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.0/Dockerfile)
-- [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
+- [`9.5`, `9.5.10` (*9.5/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/9.5/Dockerfile)
+- [`10.0`, `10.0.6` (*10.0/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.0/Dockerfile)
+- [`10.1`, `10.1.4` (*10.1/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.1/Dockerfile)
+- [`10.2`, `10.2.5` (*10.2/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.2/Dockerfile)
+- [`10.3`, `10.3.3`, `latest` (*10.3/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/10.3/Dockerfile)
+- [`testing` (*testing/Dockerfile*)](https://github.com/gitlab-ce-zh/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
-[![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
-[![Image Layers and Size](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh)
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh)
+[![Build Status](https://travis-ci.org/gitlab-ce-zh/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/gitlab-ce-zh/gitlab-ce-zh)
+[![](https://images.microbadger.com/badges/image/gitclub/gitlab-ce-zh.svg)](https://microbadger.com/images/gitclub/gitlab-ce-zh "Get your own image badge on microbadger.com")
+[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/gitlab-ce-zh/gitlab-ce-zh)
 
 # GitLab 中文社区版
 
-这是汉化的 GitLab 社区版 Docker Image [twang2218/gitlab-ce-zh](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，基于官方提供的 Docker Image  [gitlab/gitlab-ce](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> (8.9以前的版本) 和谢航的汉化 <https://gitlab.com/xhang/gitlab> (8.9 以后的版本) 而制作。
+这是汉化的 GitLab 社区版 社区版Docker Image [gitclub/gitlab-ce-zh](https://hub.docker.com/r/gitclub/gitlab-ce-zh/)  延续了 twang2218的镜像   [twang2218/gitlab-ce-zh](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，基于官方提供的 Docker Image  [gitlab/gitlab-ce](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> (8.9以前的版本) 和谢航的汉化 <https://gitlab.com/xhang/gitlab> (8.9 以后的版本) 而制作。
 
 * 如果碰到汉化问题，欢迎到 <https://gitlab.com/xhang/gitlab/issues> 来提交 Issue 甚至 Merge Request；
-* 如果碰到镜像问题，欢迎到 <https://github.com/twang2218/gitlab-ce-zh/issues> 来提交 Issue 或 Pull Request。
+* 如果碰到镜像问题，欢迎到 <https://github.com/gitlab-ce-zh/gitlab-ce-zh/issues> 来提交 Issue 或 Pull Request。
+* 如果你想体验最新的中文版，欢迎访问 <https://gitclub.cn/> 
 
 大家的贡献才能让汉化项目变得更好。如果喜欢本项目，不要忘了加星标啊。 ☺
 
@@ -27,10 +28,10 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 twang2218/gitlab-ce-zh:10.0.3
+docker run -d -p 3000:80 gitclub/gitlab-ce-zh:10.3.3
 ```
 
-*可以将 `10.0.3` 换成你所需要的版本标签。*
+*可以将 `10.3.3` 换成你所需要的版本标签。*
 
 启动后就可以通过主机的 `3000` 端口看到运行结果了，比如用的是本机 Docker 的话，访问：<http://localhost:3000> 即可。
 
@@ -50,7 +51,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:10.0.3'
+      image: 'gitclub/gitlab-ce-zh:10.3.3'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -123,7 +124,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    twang2218/gitlab-ce-zh:10.0.3
+    gitclub/gitlab-ce-zh:10.3.3
 ```
 
 如果需要进入容器修改配置文件，可以用 `docker exec` 命令进入容器：
@@ -152,15 +153,15 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 `testing` 镜像是为了帮助翻译项目测试所制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
-* `testing` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v10.0.3` 标签和 [`10-0-stable-zh` 分支](https://gitlab.com/xhang/gitlab/tree/10-0-stable-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:10.0.3-ce.0` 应用汉化结果进行构建的。
+* `testing` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v10.3.3` 标签和 [`10-3-stable-zh` 分支](https://gitlab.com/xhang/gitlab/tree/10-3-stable-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:10.3.3-ce.0` 应用汉化结果进行构建的。
 
-测试镜像将会在所对应分支发生改变后数分钟内开始构建镜像，构建成功后，会推送到 [Docker Hub 网站](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，以方便测试，可以随时关注最新的[镜像标签列表](https://hub.docker.com/r/twang2218/gitlab-ce-zh/tags/)中所对应的构建时间。
+测试镜像将会在所对应分支发生改变后数分钟内开始构建镜像，构建成功后，会推送到 [Docker Hub 网站](https://hub.docker.com/r/gitclub/gitlab-ce-zh/)，以方便测试，可以随时关注最新的[镜像标签列表](https://hub.docker.com/r/gitclub/gitlab-ce-zh/tags/)中所对应的构建时间。
 
 运行测试镜像和运行其它镜像一样，可以用 `docker-compose` 的方法，也可以用之前最简命令的方法：
 
 ```bash
-docker pull twang2218/gitlab-ce-zh:testing
-docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
+docker pull gitclub/gitlab-ce-zh:testing
+docker run -d -p 3000:80 gitclub/gitlab-ce-zh:testing
 ```
 
 > 需要注意的是，这里的 `docker pull` 是必须的，因为测试镜像构建比较频繁，需要确保本地镜像是最新的镜像。如果是 `docker-compose`，则执行 `docker-compose pull` 来或取最新镜像。
@@ -171,11 +172,11 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 `generate` 和 `ci` 是维护项目所用的命令。
 
-而 `branch`、`tag` 和 `run` 配合使用，可以在不写 `Dockerfile` 的情况下直接生成特定版本、分支的汉化版本镜像。这样方便测试还在开发的分支，或者尚未进入 `twang2218/gitlab-ce-zh` 镜像库的镜像。
+而 `branch`、`tag` 和 `run` 配合使用，可以在不写 `Dockerfile` 的情况下直接生成特定版本、分支的汉化版本镜像。这样方便测试还在开发的分支，或者尚未进入 `gitclub/gitlab-ce-zh` 镜像库的镜像。
 
 ### `generate` - 生成 Dockerfile
 
-各个小版本分支的 `Dockerfile`，如 `10.0/Dockerfile` 等，都是使用 `generate` 命令生成的。因此只需要更新 `build-version.sh` 中的相关变量就可以完成各个版本镜像的升级。
+各个小版本分支的 `Dockerfile`，如 `10.3/Dockerfile` 等，都是使用 `generate` 命令生成的。因此只需要更新 `build-version.sh` 中的相关变量就可以完成各个版本镜像的升级。
 
 * 大多数补丁版本的更新只需要修改 `VERSIONS` 变量即可；
 * 如果添加新的分支，需要注意同时删除旧的分支，包括 `VERSIONS` 变量旧的版本，以及目录文件；
@@ -203,25 +204,25 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 格式为：`./build.sh branch <基础镜像标签> <英文版本标签> <汉化版本分支>`
 
-例如：`./build.sh branch 10.0.3-ce.0 v10.0.3 8-15-stable-zh`
+例如：`./build.sh branch 10.3.3-ce.0 v10.3.3 8-15-stable-zh`
 
-这表明将使用 `gitlab/gitlab-ce:10.0.3-ce.0` 做为基础镜像，并且使用上游版本标签 `v10.0.3` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `twang2218/gitlab-ce-zh:8-15-stable-zh` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:10.3.3-ce.0` 做为基础镜像，并且使用上游版本标签 `v10.3.3` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `gitclub/gitlab-ce-zh:8-15-stable-zh` 的镜像。
 
 ### `tag` - 构建某个汉化标签的镜像
 
 格式为：`./build.sh tag <基础镜像标签> <英文版本标签>`
 
-例如： `./build.sh tag 10.0.3-ce.0 v10.0.3`
+例如： `./build.sh tag 10.3.3-ce.0 v10.3.3`
 
-这表明将使用 `gitlab/gitlab-ce:10.0.3-ce.0` 镜像为基础镜像，以 `v10.0.3` 为基础对比版本，以 `v10.0.3-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `twang2218/gitlab-ce-zh:10.0.3` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:10.3.3-ce.0` 镜像为基础镜像，以 `v10.3.3` 为基础对比版本，以 `v10.3.3-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `gitclub/gitlab-ce-zh:10.3.3` 的镜像。
 
 ### `run` - 运行某个构建好的镜像
 
 格式为：`./build.sh <镜像标签>`
 
-例如： `./build.sh run 10.0.3`
+例如： `./build.sh run 10.3.3`
 
-这将会以命令 `docker run -d -P twang2218/gitlab-ce-zh:10.0.3` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
+这将会以命令 `docker run -d -P gitlab-ce-zh/gitlab-ce-zh:10.3.3` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
 
 ```bash
 CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                                                  NAMES
