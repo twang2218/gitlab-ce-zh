@@ -20,7 +20,7 @@ export APPENDIX=(
 )
 
 export GENERATORS=(
-    generate_tag_v10_dockerfile
+    generate_tag_v8_17_dockerfile
     generate_tag_v10_dockerfile
     generate_tag_v10_dockerfile
     generate_tag_v10_dockerfile
