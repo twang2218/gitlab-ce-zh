@@ -58,7 +58,7 @@ RUN set -xe \
     && export WEBPACK_REPORT=true \
     && export NO_COMPRESSION=true \
     && export NO_PRIVILEGE_DROP=true \
-    && yarn install --frozen-lockfile \
+    && yarn install \
     && bundle exec rake gettext:compile \
     && bundle exec rake gitlab:assets:compile \
     && echo " # Cleaning ..." \
