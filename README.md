@@ -3,8 +3,8 @@
 - [`9.2`, `9.2.10` (*9.2/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.2/Dockerfile)
 - [`9.3`, `9.3.11` (*9.3/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.3/Dockerfile)
 - [`9.4`, `9.4.6` (*9.4/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.4/Dockerfile)
-- [`9.5`, `9.5.6` (*9.5/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.5/Dockerfile)
-- [`10.0`, `10.0.0`, `latest` (*10.0/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.0/Dockerfile)
+- [`9.5`, `9.5.7` (*9.5/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.5/Dockerfile)
+- [`10.0`, `10.0.1`, `latest` (*10.0/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.0/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
 [![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
@@ -27,10 +27,10 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 twang2218/gitlab-ce-zh:10.0.0
+docker run -d -p 3000:80 twang2218/gitlab-ce-zh:10.0.1
 ```
 
-*可以将 `10.0.0` 换成你所需要的版本标签。*
+*可以将 `10.0.1` 换成你所需要的版本标签。*
 
 启动后就可以通过主机的 `3000` 端口看到运行结果了，比如用的是本机 Docker 的话，访问：<http://localhost:3000> 即可。
 
@@ -50,7 +50,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:10.0.0'
+      image: 'twang2218/gitlab-ce-zh:10.0.1'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -123,7 +123,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    twang2218/gitlab-ce-zh:10.0.0
+    twang2218/gitlab-ce-zh:10.0.1
 ```
 
 如果需要进入容器修改配置文件，可以用 `docker exec` 命令进入容器：
@@ -152,7 +152,7 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 `testing` 镜像是为了帮助翻译项目测试所制作的 GitLab 镜像，它始终使用最新的翻译结果。
 
-* `testing` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v10.0.0` 标签和 [`10-0-stable-zh` 分支](https://gitlab.com/xhang/gitlab/tree/10-0-stable-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:10.0.0-ce.0` 应用汉化结果进行构建的。
+* `testing` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v10.0.1` 标签和 [`10-0-stable-zh` 分支](https://gitlab.com/xhang/gitlab/tree/10-0-stable-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:10.0.1-ce.0` 应用汉化结果进行构建的。
 
 测试镜像将会在所对应分支发生改变后数分钟内开始构建镜像，构建成功后，会推送到 [Docker Hub 网站](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，以方便测试，可以随时关注最新的[镜像标签列表](https://hub.docker.com/r/twang2218/gitlab-ce-zh/tags/)中所对应的构建时间。
 
@@ -203,25 +203,25 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 格式为：`./build.sh branch <基础镜像标签> <英文版本标签> <汉化版本分支>`
 
-例如：`./build.sh branch 10.0.0-ce.0 v10.0.0 8-15-stable-zh`
+例如：`./build.sh branch 10.0.1-ce.0 v10.0.1 8-15-stable-zh`
 
-这表明将使用 `gitlab/gitlab-ce:10.0.0-ce.0` 做为基础镜像，并且使用上游版本标签 `v10.0.0` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `twang2218/gitlab-ce-zh:8-15-stable-zh` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:10.0.1-ce.0` 做为基础镜像，并且使用上游版本标签 `v10.0.1` 作为对比的基础标签版本，也就是对应于基础镜像版本的标签，然后使用汉化分支 `8-15-stable-zh` 进行对比，生成汉化补丁，由此构建一个名为 `twang2218/gitlab-ce-zh:8-15-stable-zh` 的镜像。
 
 ### `tag` - 构建某个汉化标签的镜像
 
 格式为：`./build.sh tag <基础镜像标签> <英文版本标签>`
 
-例如： `./build.sh tag 10.0.0-ce.0 v10.0.0`
+例如： `./build.sh tag 10.0.1-ce.0 v10.0.1`
 
-这表明将使用 `gitlab/gitlab-ce:10.0.0-ce.0` 镜像为基础镜像，以 `v10.0.0` 为基础对比版本，以 `v10.0.0-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `twang2218/gitlab-ce-zh:10.0.0` 的镜像。
+这表明将使用 `gitlab/gitlab-ce:10.0.1-ce.0` 镜像为基础镜像，以 `v10.0.1` 为基础对比版本，以 `v10.0.1-zh` 为汉化版本进行对比生成汉化补丁，并构建一个名为 `twang2218/gitlab-ce-zh:10.0.1` 的镜像。
 
 ### `run` - 运行某个构建好的镜像
 
 格式为：`./build.sh <镜像标签>`
 
-例如： `./build.sh run 10.0.0`
+例如： `./build.sh run 10.0.1`
 
-这将会以命令 `docker run -d -P twang2218/gitlab-ce-zh:10.0.0` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
+这将会以命令 `docker run -d -P twang2218/gitlab-ce-zh:10.0.1` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
 
 ```bash
 CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                                                  NAMES
