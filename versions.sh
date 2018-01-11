@@ -7,8 +7,8 @@ export VERSIONS=(
     9.2.10
     9.3.11
     9.4.6
-    9.5.8
-    10.0.3
+    9.5.6
+    10.0.0
 )
 
 export APPENDIX=(
@@ -20,10 +20,10 @@ export APPENDIX=(
 )
 
 export GENERATORS=(
-    generate_tag_v8_17_dockerfile
-    generate_tag_v8_17_dockerfile
-    generate_tag_v8_17_dockerfile
-    generate_tag_v8_17_dockerfile
+    generate_tag_v10_dockerfile
+    generate_tag_v10_dockerfile
+    generate_tag_v10_dockerfile
+    generate_tag_v10_dockerfile
     generate_tag_v10_dockerfile
 )
 
