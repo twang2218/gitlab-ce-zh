@@ -19,12 +19,12 @@ export APPENDIX=(
     '-ce.0'
 )
 
-export GENERATORS=(
-    generate_tag_v8_17_dockerfile
-    generate_tag_v10_dockerfile
-    generate_tag_v10_dockerfile
-    generate_tag_v10_dockerfile
-    generate_tag_v10_dockerfile
+export TEMPLATES=(
+    Dockerfile.tag.v8.17.template
+    Dockerfile.tag.v10.template
+    Dockerfile.tag.v10.template
+    Dockerfile.tag.v10.template
+    Dockerfile.tag.v10.template
 )
 
 export BRANCHES=($(for v in ${VERSIONS[@]}; do echo -n "${v%.*} "; done))

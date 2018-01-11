@@ -10,24 +10,12 @@ fi
 # shellcheck source=./versions.sh
 source $BASEDIR/versions.sh
 
-function generate_branch_v8_17_dockerfile() {
-    cat ./template/Dockerfile.branch.v8.17.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g; s:{BRANCH}:$3:g"
-}
-
-function generate_branch_v10_dockerfile() {
-    cat ./template/Dockerfile.branch.v10.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g; s:{BRANCH}:$3:g"
-}
-
-function generate_tag_dockerfile() {
-    cat ./template/Dockerfile.tag.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g;"
-}
-
-function generate_tag_v8_17_dockerfile() {
-    cat ./template/Dockerfile.tag.v8.17.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g;"
-}
-
-function generate_tag_v10_dockerfile() {
-    cat ./template/Dockerfile.tag.v10.template | sed "s:{TAG}:$1:g; s:{VERSION}:$2:g;"
+function generate_dockerfile() {
+    local template=$1
+    local tag=$2
+    local version=$3
+    local branch=$4
+    cat ./template/$template | sed "s:{TAG}:$tag:g; s:{VERSION}:$version:g; s:{BRANCH}:$branch:g"
 }
 
 function generate_docker_compose_yml() {
@@ -63,11 +51,28 @@ function generate() {
     for i in `seq 0 $(expr $number_of_version - 1)`
     do
         mkdir -p "${BRANCHES[$i]}"
-        "${GENERATORS[$i]}"     "${VERSIONS[$i]}${APPENDIX[$i]}"    "v${VERSIONS[$i]}"  "v${VERSIONS[$i]}-zh"   >   "${BRANCHES[$i]}/Dockerfile"
+        generate_dockerfile \
+            "${TEMPLATES[$i]}" \
+            "${VERSIONS[$i]}${APPENDIX[$i]}" \
+            "v${VERSIONS[$i]}" \
+            "v${VERSIONS[$i]}-zh" \
+            > "${BRANCHES[$i]}/Dockerfile"
     done
-    generate_branch_v10_dockerfile    "${testing_tag}"          "v${testing_version}"     "${testing_branch}" >   testing/Dockerfile
-    generate_docker_compose_yml         "${version_latest}"       > docker-compose.yml
-    generate_readme "${version_latest}" "${testing_version}" "${testing_tag}" "${testing_branch}" > README.md
+    generate_dockerfile \
+        "Dockerfile.branch.v10.template" \
+        "${testing_tag}" \
+        "v${testing_version}" \
+        "${testing_branch}" \
+        > testing/Dockerfile
+    generate_docker_compose_yml \
+        "${version_latest}" \
+        > docker-compose.yml
+    generate_readme \
+        "${version_latest}" \
+        "${testing_version}" \
+        "${testing_tag}" \
+        "${testing_branch}" \
+        > README.md
 }
 
 function build_and_publish() {
@@ -110,7 +115,7 @@ function branch() {
     local version=$2
     local branch=$3
 
-    Dockerfile=$(generate_branch_v8_17_dockerfile $tag $version $branch)
+    Dockerfile=$(generate_dockerfile Dockerfile.branch.v10.template $tag $version $branch)
     echo "$Dockerfile"
     echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:$branch" -
     echo ""
@@ -129,7 +134,7 @@ function tag() {
     local tag=$1
     local version=$2
 
-    Dockerfile=$(generate_tag_v8_17_dockerfile $tag $version)
+    Dockerfile=$(generate_dockerfile Dockerfile.tag.v10.template $tag $version)
     echo "$Dockerfile"
     echo "$Dockerfile" | docker build -t "${DOCKER_USERNAME}/gitlab-ce-zh:${version:1}" -
     echo ""
