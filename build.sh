@@ -230,6 +230,33 @@ function update() {
     git pull
 }
 
+function vps() {
+    local command=$1
+    shift
+    case "$command" in
+        create)
+            docker-machine create -d digitalocean \
+                --digitalocean-size=8gb \
+                --engine-opt=ipv6 \
+                --engine-opt=fixed-cidr-v6="2001:db8:1::/64" \
+                $@ gitlab
+            ;;
+        rm)
+            docker-machine rm $@ gitlab
+            ;;
+        env)
+            docker-machine env $@ gitlab
+            ;;
+        ip)
+            docker-machine ip gitlab
+            ;;
+        ssh)
+            docker-machine ssh gitlab $@
+            ;;
+        *)  echo "Usage: $0 vps <create|remove|env|ip|ssh>" ;;
+    esac
+}
+
 function main() {
     local command=$1
     shift
@@ -246,7 +273,8 @@ function main() {
             update
             detect_and_build testing
             ;;
-        *)          echo "Usage: $0 <branch|tag|generate|run|ci|prepare|detect_and_build>" ;;
+        vps)       vps "$@" ;;
+        *)         echo "Usage: $0 <branch|tag|generate|run|ci|prepare|detect_and_build|vps>" ;;
     esac
 }
 
