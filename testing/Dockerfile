@@ -1,6 +1,6 @@
-FROM gitlab/gitlab-ce:10.1.4-ce.0
+FROM gitlab/gitlab-ce:10.2.1-ce.0
 
-ENV GITLAB_VERSION=10-1-stable-zh
+ENV GITLAB_VERSION=10-2-stable-zh
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -27,7 +27,7 @@ RUN set -xe \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && export buildDeps='lsb-release patch nodejs python build-essential yarn=0.27.5-1 cmake' \
+    && export buildDeps='lsb-release patch nodejs python build-essential yarn cmake' \
     && apt-get install -yqq $buildDeps \
     && echo " # Generating translation patch ..." \
     && cd /tmp \
@@ -35,7 +35,7 @@ RUN set -xe \
     && cd gitlab \
     && export REVISION=$(cat ${GITLAB_DIR}/REVISION) \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
-    && git diff --diff-filter=d v10.1.4..origin/10-1-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff --diff-filter=d v10.2.1..origin/10-2-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy locale files ..." \
