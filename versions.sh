@@ -8,7 +8,7 @@ export VERSIONS=(
     10.0.6
     10.1.4
     10.2.5
-    10.3.0
+    10.3.1
 )
 
 export APPENDIX=(
