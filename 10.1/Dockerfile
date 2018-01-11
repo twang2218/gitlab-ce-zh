@@ -1,6 +1,6 @@
-FROM gitlab/gitlab-ce:9.2.10-ce.0
+FROM gitlab/gitlab-ce:10.1.0-ce.0
 
-ENV GITLAB_VERSION=v9.2.10
+ENV GITLAB_VERSION=v10.1.0
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -15,6 +15,9 @@ ENV TZ=Asia/Shanghai
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_ZH_GIT=https://gitlab.com/xhang/gitlab.git
 
+# Reference:
+# * https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/config/software/gitlab-rails.rb
+# * https://gitlab.com/gitlab-org/gitlab-ce/blob/master/.gitlab-ci.yml
 RUN set -xe \
     && echo " # Preparing ..." \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -31,7 +34,7 @@ RUN set -xe \
     && git clone ${GITLAB_ZH_GIT} gitlab \
     && cd gitlab \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
-    && git diff v9.2.10..v9.2.10-zh -- .  ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff v10.1.0..v10.1.0-zh -- .  ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy locale files ..." \
@@ -42,13 +45,19 @@ RUN set -xe \
     && cp config/database.yml.postgresql config/database.yml \
     && cp config/secrets.yml.example config/secrets.yml \
     && rm -rf public/assets \
-    && rm -rf yarn.lock node_modules \
-    && yarn install \
-    && RAILS_ENV=production \
-        NO_PRIVILEGE_DROP=true \
-        USE_DB=false \
-        SKIP_STORAGE_VALIDATION=true \
-        bundle exec rake gitlab:assets:compile \
+    && export NODE_ENV=production \
+    && export RAILS_ENV=production \
+    && export SETUP_DB=false \
+    && export USE_DB=false \
+    && export SKIP_STORAGE_VALIDATION=true \
+    && export WEBPACK_REPORT=true \
+    && export NO_COMPRESSION=true \
+    && export NO_PRIVILEGE_DROP=true \
+    && yarn install --frozen-lockfile \
+    && bundle exec rake gettext:compile \
+    && bundle exec rake gitlab:assets:compile \
+    && echo " # Cleaning ..." \
+    && yarn cache clean \
     && rm -rf log \
         tmp \
         config/gitlab.yml \
@@ -58,8 +67,6 @@ RUN set -xe \
         .gitlab_shell_secret \
         .gitlab_workhorse_secret \
         node_modules \
-    && echo " # Cleaning ..." \
-    && yarn cache clean \
     && apt-get purge -y --auto-remove \
         -o APT::AutoRemove::RecommendsImportant=false \
         -o APT::AutoRemove::SuggestsImportant=false \
