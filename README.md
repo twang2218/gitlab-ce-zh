@@ -7,9 +7,24 @@
 - [`10.3`, `10.3.4`, `latest` (*10.3/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.3/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
-[![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
-[![Image Layers and Size](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh)
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh)
+[![GitHub Stars]][GitHub Link] [![Docker Hub Stars]][Docker Hub Link] [![Docker Hub Pulls]][Docker Hub Link] [![Build Status]][Travis CI Link] [![Docker Image Layers]][Docker Hub Link] [![Deploy to Docker Cloud]][Docker Cloud Link]
+
+[Build Status]: https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master
+[Travis CI Link]: https://travis-ci.org/twang2218/gitlab-ce-zh
+
+[Docker Hub Stars]: https://img.shields.io/docker/stars/twang2218/gitlab-ce-zh.svg
+[Docker Hub Pulls]: https://img.shields.io/docker/pulls/twang2218/gitlab-ce-zh.svg
+[Docker Image Layers]: https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg
+[Docker Hub Link]: http://microbadger.com/images/twang2218/gitlab-ce-zh
+
+[GitHub Stars]: https://img.shields.io/github/stars/twang2218/gitlab-ce-zh.svg?style=social&label=Stars
+[GitHub Link]: https://github.com/twang2218/gitlab-ce-zh/
+
+[License]: https://img.shields.io/github/license/twang2218/gitlab-ce-zh.svg
+[License Link]: https://github.com/twang2218/gitlab-ce-zh/blob/master/LICENSE.md
+
+[Deploy to Docker Cloud]: https://img.shields.io/badge/deploy-docker_cloud-orange.svg?style=flat
+[Docker Cloud Link]: https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh
 
 # GitLab 中文社区版
 
