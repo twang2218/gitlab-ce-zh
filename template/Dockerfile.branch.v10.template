@@ -49,7 +49,6 @@ RUN set -xe \
     && cp config/database.yml.postgresql config/database.yml \
     && cp config/secrets.yml.example config/secrets.yml \
     && rm -rf public/assets \
-    && rm -rf yarn.lock node_modules \
     && export NODE_ENV=production \
     && export RAILS_ENV=production \
     && export SETUP_DB=false \
