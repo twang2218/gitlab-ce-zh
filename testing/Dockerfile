@@ -14,6 +14,8 @@ ENV TZ=Asia/Shanghai
 
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_ZH_GIT=https://gitlab.com/xhang/gitlab.git
+ENV SOURCE_BRANCH=v10.3.5
+ENV TARGET_BRANCH=10-3-stable-zh
 
 # Reference:
 # * https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/config/software/gitlab-rails.rb
@@ -35,11 +37,11 @@ RUN set -xe \
     && cd gitlab \
     && export REVISION=$(cat ${GITLAB_DIR}/REVISION) \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
-    && git diff --diff-filter=d v10.3.5..origin/10-3-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff --diff-filter=d ${SOURCE_BRANCH}..origin/${TARGET_BRANCH} -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy locale files ..." \
-    && git checkout 10-3-stable-zh \
+    && git checkout ${TARGET_BRANCH} \
     && cp -R locale ${GITLAB_DIR}/ \
     && echo " # Install missing Gem packages ..." \
     && cd ${GITLAB_DIR} \
