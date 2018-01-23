@@ -39,6 +39,7 @@ RUN set -xe \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy locale files ..." \
+    && git checkout {BRANCH} \
     && cp -R locale ${GITLAB_DIR}/ \
     && echo " # Install missing Gem packages ..." \
     && cd ${GITLAB_DIR} \

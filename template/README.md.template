@@ -10,12 +10,12 @@
 [![GitHub Stars]][GitHub Link] [![Docker Hub Stars]][Docker Hub Link] [![Docker Hub Pulls]][Docker Hub Link] [![Build Status]][Travis CI Link] [![Docker Image Layers]][Docker Hub Link] [![Deploy to Docker Cloud]][Docker Cloud Link]
 
 [Build Status]: https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master
-[Travis CI Link]: https://travis-ci.org/twang2218/gitlab-ce-zh
+[Travis CI Link]: https://travis-ci.org/twang2218/gitlab-ce-zh/branches
 
 [Docker Hub Stars]: https://img.shields.io/docker/stars/twang2218/gitlab-ce-zh.svg
 [Docker Hub Pulls]: https://img.shields.io/docker/pulls/twang2218/gitlab-ce-zh.svg
 [Docker Image Layers]: https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg
-[Docker Hub Link]: http://microbadger.com/images/twang2218/gitlab-ce-zh
+[Docker Hub Link]: https://hub.docker.com/r/twang2218/gitlab-ce-zh/
 
 [GitHub Stars]: https://img.shields.io/github/stars/twang2218/gitlab-ce-zh.svg?style=social&label=Stars
 [GitHub Link]: https://github.com/twang2218/gitlab-ce-zh/
@@ -28,10 +28,11 @@
 
 # GitLab 中文社区版
 
-这是汉化的 GitLab 社区版 Docker Image [twang2218/gitlab-ce-zh](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，基于官方提供的 Docker Image  [gitlab/gitlab-ce](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> (8.9以前的版本) 和谢航的汉化 <https://gitlab.com/xhang/gitlab> (8.9 以后的版本) 而制作。
+这是汉化的 GitLab 社区版 Docker Image [twang2218/gitlab-ce-zh](https://hub.docker.com/r/twang2218/gitlab-ce-zh/tags/)，基于官方提供的 Docker Image  [gitlab/gitlab-ce](https://hub.docker.com/r/gitlab/gitlab-ce/tags/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> (8.9以前的版本) 和谢航的汉化 <https://gitlab.com/xhang/gitlab> (8.9 以后的版本) 而制作。
 
 * 如果碰到汉化问题，欢迎到 <https://gitlab.com/xhang/gitlab/issues> 来提交 Issue 甚至 Merge Request；
 * 如果碰到镜像问题，欢迎到 <https://github.com/twang2218/gitlab-ce-zh/issues> 来提交 Issue 或 Pull Request。
+* 如果是官方镜像同样存在的问题，欢迎到上游项目 <https://gitlab.com/gitlab-org/gitlab-ce/issues>（Gitlab 项目自身），或者 <https://gitlab.com/gitlab-org/omnibus-gitlab/issues>（Docker及打包问题）提交 Issue。
 
 大家的贡献才能让汉化项目变得更好。如果喜欢本项目，不要忘了加星标啊。 ☺
 

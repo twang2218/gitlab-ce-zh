@@ -38,6 +38,7 @@ RUN set -xe \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy locale files ..." \
+    && git checkout v9.5.10-zh \
     && cp -R locale ${GITLAB_DIR}/ \
     && echo " # Regenerating the assets" \
     && cd ${GITLAB_DIR} \

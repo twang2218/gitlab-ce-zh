@@ -258,6 +258,12 @@ function vps() {
         ssh)
             docker-machine ssh gitlab $@
             ;;
+        run)
+            docker run --name gitlab -d -p 3000:80 ${@:-"twang2218/gitlab-ce-zh:latest"}
+            ;;
+        stop)
+            docker rm -f gitlab
+            ;;
         *)  echo "Usage: $0 vps <create|remove|env|ip|ssh>" ;;
     esac
 }
