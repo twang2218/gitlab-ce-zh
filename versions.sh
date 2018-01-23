@@ -4,11 +4,11 @@
 # Unless there is an extra version branch for testing, such as, '-rc'
 #  Zero-based array
 export VERSIONS=(
-    9.5.10
     10.0.6
     10.1.7
     10.2.7
     10.3.5
+    10.4.0
 )
 
 export APPENDIX=(
@@ -21,7 +21,7 @@ export APPENDIX=(
 
 export TEMPLATES=(
     Dockerfile.tag.v10.template
-    Dockerfile.tag.v10.template
+    Dockerfile.tag.v10.1.template
     Dockerfile.tag.v10.1.template
     Dockerfile.tag.v10.1.template
     Dockerfile.tag.v10.1.template
