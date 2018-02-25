@@ -1,6 +1,6 @@
-FROM gitlab/gitlab-ce:10.0.6-ce.0
+FROM gitlab/gitlab-ce:10.5.1-ce.0
 
-ENV GITLAB_VERSION=v10.0.6
+ENV GITLAB_VERSION=v10.5.1
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -29,7 +29,7 @@ RUN set -xe \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && export buildDeps='lsb-release patch nodejs python build-essential yarn=0.27.5-1 cmake' \
+    && export buildDeps='lsb-release patch nodejs python build-essential yarn cmake' \
     && apt-get install -yqq $buildDeps \
     && echo " # Generating translation patch ..." \
     && cd /tmp \
