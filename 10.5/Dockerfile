@@ -1,6 +1,6 @@
-FROM gitlab/gitlab-ce:10.5.4-ce.0
+FROM gitlab/gitlab-ce:10.5.5-ce.0
 
-ENV GITLAB_VERSION=v10.5.4
+ENV GITLAB_VERSION=v10.5.5
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
