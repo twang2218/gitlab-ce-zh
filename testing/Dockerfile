@@ -1,6 +1,6 @@
-FROM gitlab/gitlab-ce:10.5.6-ce.0
+FROM gitlab/gitlab-ce:10.6.0-ce.0
 
-ENV GITLAB_VERSION=10-5-stable-zh
+ENV GITLAB_VERSION=10-6-stable-zh
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -14,8 +14,8 @@ ENV TZ=Asia/Shanghai
 
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_ZH_GIT=https://gitlab.com/xhang/gitlab.git
-ENV SOURCE_BRANCH=v10.5.6
-ENV TARGET_BRANCH=10-5-stable-zh
+ENV SOURCE_BRANCH=v10.6.0
+ENV TARGET_BRANCH=10-6-stable-zh
 
 # Reference:
 # * https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/config/software/gitlab-rails.rb
