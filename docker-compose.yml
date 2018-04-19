@@ -1,7 +1,7 @@
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:10.6.3'
+      image: 'twang2218/gitlab-ce-zh:10.6.4'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
