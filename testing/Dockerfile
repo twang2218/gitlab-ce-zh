@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:10.7.2-ce.0
+FROM gitlab/gitlab-ce:10.7.3-ce.0
 
 ENV GITLAB_VERSION=10-7-stable-zh
 
@@ -14,7 +14,7 @@ ENV TZ=Asia/Shanghai
 
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_ZH_GIT=https://gitlab.com/xhang/gitlab.git
-ENV SOURCE_BRANCH=v10.7.2
+ENV SOURCE_BRANCH=v10.7.3
 ENV TARGET_BRANCH=10-7-stable-zh
 
 # Reference:
