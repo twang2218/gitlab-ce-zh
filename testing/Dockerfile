@@ -26,7 +26,7 @@ RUN set -xe \
     && git clone ${GITLAB_GIT_ZH} gitlab \
     && cd gitlab \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/ :!vendor/assets/' \
-    && git diff --diff-filter=d v10.8.0..10-8-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff --diff-filter=d v10.8.0..origin/10-8-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy assets files ..." \

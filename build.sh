@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -xe
+
 BASEDIR=$(dirname $0)
 
 if [[ -z "${DOCKER_USERNAME}" ]]; then
