@@ -11,11 +11,7 @@ fi
 source $BASEDIR/versions.sh
 
 function generate_dockerfile() {
-    local template=$1
-    local tag=$2
-    local version=$3
-    local branch=$4
-    cat ./template/$template | sed "s:{TAG}:$tag:g; s:{VERSION}:$version:g; s:{BRANCH}:$branch:g"
+    cat ./template/$1 | sed "s:{IMAGE_TAG}:$2:g; s:{COMMIT_UPSTREAM}:$3:g; s:{COMMIT_ZH}:$4:g"
 }
 
 function generate_docker_compose_yml() {
@@ -58,15 +54,27 @@ function generate() {
             "v${VERSIONS[$i]}-zh" \
             > "${BRANCHES[$i]}/Dockerfile"
     done
+
+    mkdir -p testing
     generate_dockerfile \
         "Dockerfile.branch.v10.template" \
         "${testing_tag}" \
         "v${testing_version}" \
         "${testing_branch}" \
         > testing/Dockerfile
+
+    mkdir -p rc
+    generate_dockerfile \
+        "Dockerfile.tag.v10.1.template" \
+        "${RC_IMAGE_TAG}" \
+        "${RC_COMMIT_UPSTREAM}" \
+        "${RC_COMMIT_ZH}" \
+        > rc/Dockerfile
+
     generate_docker_compose_yml \
         "${version_latest}" \
         > docker-compose.yml
+
     generate_readme \
         "${version_latest}" \
         "${testing_version}" \
@@ -141,7 +149,6 @@ function tag() {
     echo "List of available images:"
     docker images ${DOCKER_USERNAME}/gitlab-ce-zh
 }
-
 
 function ci() {
     env | grep TRAVIS
