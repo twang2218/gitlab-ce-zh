@@ -1,7 +1,7 @@
 #####################
 #  Building Stage   #
 #####################
-FROM gitlab/gitlab-ce:10.8.1-ce.0 as builder
+FROM gitlab/gitlab-ce:10.8.2-ce.0 as builder
 
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_GIT_ZH=https://gitlab.com/xhang/gitlab.git
@@ -26,7 +26,7 @@ RUN set -xe \
     && git clone ${GITLAB_GIT_ZH} gitlab \
     && cd gitlab \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/ :!vendor/assets/' \
-    && git diff --diff-filter=d v10.8.1..origin/10-8-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff --diff-filter=d v10.8.2..origin/10-8-stable-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy assets files ..." \
@@ -83,7 +83,7 @@ RUN set -xe \
 ######################
 #  Production Stage  #
 ######################
-FROM gitlab/gitlab-ce:10.8.1-ce.0 as production
+FROM gitlab/gitlab-ce:10.8.2-ce.0 as production
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -95,10 +95,10 @@ RUN set -xe \
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 ENV TZ=Asia/Shanghai
 
-ENV GITLAB_VERSION=v10.8.1
+ENV GITLAB_VERSION=v10.8.2
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_GIT_ZH=https://gitlab.com/xhang/gitlab.git
-ENV GITLAB_GIT_COMMIT_UPSTREAM=v10.8.1
+ENV GITLAB_GIT_COMMIT_UPSTREAM=v10.8.2
 ENV GITLAB_GIT_COMMIT_ZH=10-8-stable-zh
 
 COPY --from=builder ${GITLAB_DIR}/app                   ${GITLAB_DIR}/app
