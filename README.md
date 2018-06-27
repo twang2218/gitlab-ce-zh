@@ -3,7 +3,7 @@
 - [`10.4`, `10.4.7` (*10.4/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.4/Dockerfile)
 - [`10.5`, `10.5.8` (*10.5/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.5/Dockerfile)
 - [`10.6`, `10.6.6` (*10.6/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.6/Dockerfile)
-- [`10.7`, `10.7.5` (*10.7/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.7/Dockerfile)
+- [`10.7`, `10.7.6` (*10.7/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.7/Dockerfile)
 - [`10.8`, `10.8.5`, `latest` (*10.8/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.8/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
