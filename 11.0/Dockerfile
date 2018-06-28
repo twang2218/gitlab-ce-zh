@@ -1,7 +1,7 @@
 #####################
 #  Building Stage   #
 #####################
-FROM gitlab/gitlab-ce:10.4.7-ce.0 as builder
+FROM gitlab/gitlab-ce:11.0.0-ce.0 as builder
 
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_GIT_ZH=https://gitlab.com/xhang/gitlab.git
@@ -14,7 +14,7 @@ RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
     && export SSL_CERT_DIR=/etc/ssl/certs/ \
     && export GIT_SSL_CAPATH=/etc/ssl/certs/ \
-    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
@@ -26,11 +26,11 @@ RUN set -xe \
     && git clone ${GITLAB_GIT_ZH} gitlab \
     && cd gitlab \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/ :!vendor/assets/' \
-    && git diff --diff-filter=d v10.4.7..v10.4.7-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff --diff-filter=d v11.0.0..v11.0.0-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy assets files ..." \
-    && git checkout v10.4.7-zh \
+    && git checkout v11.0.0-zh \
     && cp -R locale ${GITLAB_DIR}/ \
     && mkdir -p ${GITLAB_DIR}/app \
     && cp -R app/assets ${GITLAB_DIR}/app/ \
@@ -52,6 +52,7 @@ RUN set -xe \
     && export WEBPACK_REPORT=true \
     && export NO_COMPRESSION=true \
     && export NO_PRIVILEGE_DROP=true \
+    && export NODE_OPTIONS=--max-old-space-size=4086 \
     && yarn install --frozen-lockfile \
     && bundle exec rake gettext:compile \
     && bundle exec rake gitlab:assets:compile
@@ -76,7 +77,7 @@ RUN set -xe \
 ######################
 #  Production Stage  #
 ######################
-FROM gitlab/gitlab-ce:10.4.7-ce.0 as production
+FROM gitlab/gitlab-ce:11.0.0-ce.0 as production
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -88,11 +89,11 @@ RUN set -xe \
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 ENV TZ=Asia/Shanghai
 
-ENV GITLAB_VERSION=v10.4.7
+ENV GITLAB_VERSION=v11.0.0
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_GIT_ZH=https://gitlab.com/xhang/gitlab.git
-ENV GITLAB_GIT_COMMIT_UPSTREAM=v10.4.7
-ENV GITLAB_GIT_COMMIT_ZH=v10.4.7-zh
+ENV GITLAB_GIT_COMMIT_UPSTREAM=v11.0.0
+ENV GITLAB_GIT_COMMIT_ZH=v11.0.0-zh
 
 COPY --from=builder ${GITLAB_DIR}/app                   ${GITLAB_DIR}/app
 COPY --from=builder ${GITLAB_DIR}/public                ${GITLAB_DIR}/public

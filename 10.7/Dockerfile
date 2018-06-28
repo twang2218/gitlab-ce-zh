@@ -14,7 +14,7 @@ RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
     && export SSL_CERT_DIR=/etc/ssl/certs/ \
     && export GIT_SSL_CAPATH=/etc/ssl/certs/ \
-    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
@@ -52,6 +52,7 @@ RUN set -xe \
     && export WEBPACK_REPORT=true \
     && export NO_COMPRESSION=true \
     && export NO_PRIVILEGE_DROP=true \
+    && export NODE_OPTIONS=--max-old-space-size=4086 \
     && yarn install --frozen-lockfile \
     && bundle exec rake gettext:compile \
     && bundle exec rake gitlab:assets:compile
