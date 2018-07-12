@@ -25,7 +25,7 @@ RUN set -xe \
     && cd /tmp \
     && git clone ${GITLAB_GIT_ZH} gitlab \
     && cd gitlab \
-    && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/ :!vendor/assets/' \
+    && export IGNORE_DIRS=':!qa :!spec :!features :!.gitignore :!.gitlab :!locale :!app/assets/ :!vendor/assets/' \
     && git diff --diff-filter=d v10.8.5..v10.8.5-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
@@ -54,8 +54,9 @@ RUN set -xe \
     && export NO_PRIVILEGE_DROP=true \
     && export NODE_OPTIONS=--max-old-space-size=4086 \
     && yarn install --frozen-lockfile \
-    && bundle exec rake gettext:compile \
-    && bundle exec rake gitlab:assets:compile
+    && bin/bundle install --frozen \
+    && bin/rake gettext:compile \
+    && bin/rake gitlab:assets:compile
 
 RUN set -xe \
     && echo " # Cleaning ..." \
