@@ -4,11 +4,11 @@
 # Unless there is an extra version branch for testing, such as, '-rc'
 #  Zero-based array
 export VERSIONS=(
-    10.5.8
     10.6.6
     10.7.7
     10.8.6
     11.0.4
+    11.1.0
 )
 
 export APPENDIX=(
