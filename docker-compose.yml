@@ -28,6 +28,7 @@ services:
         - config:/etc/gitlab
         - data:/var/opt/gitlab
         - logs:/var/log/gitlab
+      network_mode: host
 volumes:
     config:
     data:
