@@ -278,6 +278,19 @@ git clone git@gitlab.example.com:myuser/awesome-project.git
 git clone ssh://git@gitlab.example.com:2222/myuser/awesome-project.git
 ```
 
+#### 开启容器到外部的访问
+
+默认情况下，从容器发送到默认网桥的流量，并不会被转发到外部。要开启转发，需要改变两个设置。这些不是 Docker 命令，并且它们会影响 Docker 主机的内核。
+这些设置在重新启动时失效，因此可能需要将它们添加到启动脚本中。
+
+```bash
+# 配置 Linux 内核来允许 IP 转发
+$ sysctl net.ipv4.conf.all.forwarding=1
+
+# 改变 iptables 的政策，FORWARD 政策从 DROP 变为 ACCEPT
+$ sudo iptables -P FORWARD ACCEPT
+```
+
 # 相关信息
 
 * GitLab Docker 相关操作请参考：<http://docs.gitlab.com/omnibus/docker/>
