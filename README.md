@@ -1,15 +1,19 @@
 # 支持的 tags 和对应的 `Dockerfile`
 
-- [`9.2`, `9.2.10` (*9.2/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.2/Dockerfile)
-- [`9.3`, `9.3.11` (*9.3/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.3/Dockerfile)
-- [`9.4`, `9.4.6` (*9.4/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.4/Dockerfile)
-- [`9.5`, `9.5.8` (*9.5/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/9.5/Dockerfile)
-- [`10.0`, `10.0.3`, `latest` (*10.0/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/10.0/Dockerfile)
-- [`testing` (*testing/Dockerfile*)](https://github.com/twang2218/gitlab-ce-zh/blob/master/testing/Dockerfile)
+- [`9.2`, `9.2.10` (*9.2/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/9.2/Dockerfile)
+- [`9.3`, `9.3.11` (*9.3/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/9.3/Dockerfile)
+- [`9.4`, `9.4.6` (*9.4/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/9.4/Dockerfile)
+- [`9.5`, `9.5.8` (*9.5/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/9.5/Dockerfile)
+- [`10.0`, `10.0.3` (*10.0/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/10.0/Dockerfile)
+- [`11.1`, `11.1.4` (*11.1/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.1/Dockerfile)
+- [`11.11`, `11.11.8` (*11.11/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.11/Dockerfile)
+- [`12.10`, `12.10.14` (*12.10/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/12.10/Dockerfile)
+- [`13.3`, `13.3.6`, `latest` (*13.3/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/13.3/Dockerfile)
+- [`testing` (*testing/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
-[![Build Status](https://travis-ci.org/twang2218/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/twang2218/gitlab-ce-zh)
-[![Image Layers and Size](https://images.microbadger.com/badges/image/twang2218/gitlab-ce-zh.svg)](http://microbadger.com/images/twang2218/gitlab-ce-zh)
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/twang2218/gitlab-ce-zh)
+[![Build Status](https://travis-ci.org/blueapple168/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/blueapple168/gitlab-ce-zh)
+[![Image Layers and Size](https://images.microbadger.com/badges/image/blueapple/gitlab-ce-zh.svg)](http://microbadger.com/images/blueapple/gitlab-ce-zh)
+[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/blueapple168/gitlab-ce-zh)
 
 # GitLab 中文社区版
 
@@ -27,7 +31,7 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 twang2218/gitlab-ce-zh:10.0.3
+docker run -d -p 3000:80 blueapple/gitlab-ce-zh:10.0.3
 ```
 
 *可以将 `10.0.3` 换成你所需要的版本标签。*
@@ -50,7 +54,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'twang2218/gitlab-ce-zh:10.0.3'
+      image: 'blueapple/gitlab-ce-zh:10.0.3'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -123,7 +127,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    twang2218/gitlab-ce-zh:10.0.3
+    blueapple/gitlab-ce-zh:10.0.3
 ```
 
 如果需要进入容器修改配置文件，可以用 `docker exec` 命令进入容器：
@@ -154,13 +158,13 @@ docker volume rm gitlab-config gitlab-datagitlab-logs
 
 * `testing` 是比较 [xhang 翻译项目](https://gitlab.com/xhang/gitlab) 的 `v10.0.3` 标签和 [`10-0-stable-zh` 分支](https://gitlab.com/xhang/gitlab/tree/10-0-stable-zh) 的差异生成汉化补丁，并基于官方镜像 `gitlab/gitlab-ce:10.0.3-ce.0` 应用汉化结果进行构建的。
 
-测试镜像将会在所对应分支发生改变后数分钟内开始构建镜像，构建成功后，会推送到 [Docker Hub 网站](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，以方便测试，可以随时关注最新的[镜像标签列表](https://hub.docker.com/r/twang2218/gitlab-ce-zh/tags/)中所对应的构建时间。
+测试镜像将会在所对应分支发生改变后数分钟内开始构建镜像，构建成功后，会推送到 [Docker Hub 网站](https://hub.docker.com/r/blueapple/gitlab-ce-zh/)，以方便测试，可以随时关注最新的[镜像标签列表](https://hub.docker.com/r/blueapple/gitlab-ce-zh/tags/)中所对应的构建时间。
 
 运行测试镜像和运行其它镜像一样，可以用 `docker-compose` 的方法，也可以用之前最简命令的方法：
 
 ```bash
-docker pull twang2218/gitlab-ce-zh:testing
-docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
+docker pull blueapple/gitlab-ce-zh:testing
+docker run -d -p 3000:80 blueapple/gitlab-ce-zh:testing
 ```
 
 > 需要注意的是，这里的 `docker pull` 是必须的，因为测试镜像构建比较频繁，需要确保本地镜像是最新的镜像。如果是 `docker-compose`，则执行 `docker-compose pull` 来或取最新镜像。
@@ -221,7 +225,7 @@ docker run -d -p 3000:80 twang2218/gitlab-ce-zh:testing
 
 例如： `./build.sh run 10.0.3`
 
-这将会以命令 `docker run -d -P twang2218/gitlab-ce-zh:10.0.3` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
+这将会以命令 `docker run -d -P blueapple/gitlab-ce-zh:10.0.3` 来运行镜像。这里使用的是 `-P`，因此会随机映射端口。方便测试环境测试，避免和其它端口冲突。
 
 ```bash
 CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                                                  NAMES
