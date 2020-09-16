@@ -1,7 +1,7 @@
 #####################
 #  Building Stage   #
 #####################
-FROM gitlab/gitlab-ce:11.1.4-ce.0 as builder
+FROM gitlab/gitlab-ce:11.1.4-ce.0 AS builder
 
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
 ENV GITLAB_GIT_ZH=https://gitlab.com/xhang/gitlab.git
