@@ -12,7 +12,7 @@
 
 [![Build Status](https://travis-ci.org/blueapple168/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/blueapple168/gitlab-ce-zh)
 [![Image Layers and Size](https://images.microbadger.com/badges/image/blueapple/gitlab-ce-zh.svg)](http://microbadger.com/images/blueapple/gitlab-ce-zh)
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/blueapple/gitlab-ce-zh)
+
 
 # GitLab 中文社区版
 
