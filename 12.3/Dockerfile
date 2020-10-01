@@ -1,5 +1,5 @@
 #####################
-#  Building Stage   #
+#  Building Stages   #
 #####################
 FROM gitlab/gitlab-ce:12.3.5-ce.0 as builder
 
