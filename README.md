@@ -6,9 +6,8 @@
 - [`9.5`, `9.5.8` (*9.5/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/9.5/Dockerfile)
 - [`10.0`, `10.0.3` (*10.0/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/10.0/Dockerfile)
 - [`11.1`, `11.1.4` (*11.1/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.1/Dockerfile)
-- [`11.11`, `11.11.8` (*11.11/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.11/Dockerfile)
-- [`12.10`, `12.10.14` (*12.10/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/12.10/Dockerfile)
-- [`13.3`, `13.3.6`, `latest` (*13.3/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/13.3/Dockerfile)
+- [`11.11`, `11.11.7` (*11.11/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.11/Dockerfile)
+- [`12.3`, `12.3.5` (*12.10/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/12.3/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
 [![Build Status](https://travis-ci.org/blueapple168/gitlab-ce-zh.svg?branch=master)](https://travis-ci.org/blueapple168/gitlab-ce-zh)
@@ -31,7 +30,7 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 blueapple/gitlab-ce-zh:10.0.3
+docker run -d -p 3000:80 blueapple/gitlab-ce-zh:12.3.5
 ```
 
 *可以将 `10.0.3` 换成你所需要的版本标签。*
@@ -54,7 +53,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'blueapple/gitlab-ce-zh:10.0.3'
+      image: 'blueapple/gitlab-ce-zh:12.3.5'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -127,7 +126,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    blueapple/gitlab-ce-zh:10.0.3
+    blueapple/gitlab-ce-zh:12.3.5
 ```
 
 如果需要进入容器修改配置文件，可以用 `docker exec` 命令进入容器：
