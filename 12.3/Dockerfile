@@ -4,7 +4,7 @@
 FROM gitlab/gitlab-ce:12.3.5-ce.0 as builder
 
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
-ENV GITLAB_GIT_ZH=https://gitlab.com/xhang/gitlab.git
+ENV GITLAB_GIT_ZH=https://gitee.com/webboyvc/gitlab.git
 
 # Reference:
 # * https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/config/software/gitlab-rails.rb
@@ -92,7 +92,7 @@ ENV TZ=Asia/Shanghai
 
 ENV GITLAB_VERSION=v12.3.5
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
-ENV GITLAB_GIT_ZH=https://gitlab.com/xhang/gitlab.git
+ENV GITLAB_GIT_ZH=https://gitee.com/webboyvc/gitlab.git
 ENV GITLAB_GIT_COMMIT_UPSTREAM=v12.3.5
 ENV GITLAB_GIT_COMMIT_ZH=v12.3.5-zh
 
