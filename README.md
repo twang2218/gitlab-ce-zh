@@ -6,7 +6,9 @@
 - [`9.5`, `9.5.8` (*9.5/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/9.5/Dockerfile)
 - [`10.0`, `10.0.3` (*10.0/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/10.0/Dockerfile)
 - [`11.1`, `11.1.4` (*11.1/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.1/Dockerfile)
-- [`11.11`, `11.11.7` (*11.11/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.11/Dockerfile)
+- [`11.11`, `11.11.8` (*11.11/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.11/Dockerfile)
+- [`12.0`, `12.0.9` (*12.0/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/12.0/Dockerfile)
+- [`12.1`, `12.1.14` (*12.1/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/12.1/Dockerfile)
 - [`12.3`, `12.3.5` (*12.10/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/12.3/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
