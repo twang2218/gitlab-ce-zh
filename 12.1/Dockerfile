@@ -4,7 +4,7 @@
 FROM gitlab/gitlab-ce:12.1.0-ce.0 as builder
 
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
-ENV GITLAB_GIT_ZH=https://gitlab.com/caeret/gitlab-ce.git
+ENV GITLAB_GIT_ZH=https://gitlab.com/xhang/gitlab.git
 
 RUN set -xe \
     && echo " # Preparing ..." \
@@ -89,7 +89,7 @@ ENV TZ=Asia/Shanghai
 
 ENV GITLAB_VERSION=v12.1.0
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
-ENV GITLAB_GIT_ZH=https://gitlab.com/caeret/gitlab-ce.git
+ENV GITLAB_GIT_ZH=https://gitlab.com/xhang/gitlab.git
 ENV GITLAB_GIT_COMMIT_UPSTREAM=v12.1.0
 ENV GITLAB_GIT_COMMIT_ZH=v12.1.0-zh
 
