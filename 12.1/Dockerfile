@@ -1,14 +1,11 @@
 #####################
 #  Building Stage   #
 #####################
-FROM gitlab/gitlab-ce:12.1.14-ce.0 as builder
+FROM gitlab/gitlab-ce:12.1.0-ce.0 as builder
 
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
-ENV GITLAB_GIT_ZH=https://gitee.com/webboyvc/gitlab.git
+ENV GITLAB_GIT_ZH=https://gitlab.com/caeret/gitlab-ce.git
 
-# Reference:
-# * https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/config/software/gitlab-rails.rb
-# * https://gitlab.com/gitlab-org/gitlab-ce/blob/master/.gitlab-ci.yml
 RUN set -xe \
     && echo " # Preparing ..." \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -26,11 +23,11 @@ RUN set -xe \
     && git clone ${GITLAB_GIT_ZH} gitlab \
     && cd gitlab \
     && export IGNORE_DIRS=':!qa :!spec :!features :!.gitignore :!.gitlab :!locale :!app/assets/ :!vendor/assets/' \
-    && git diff --diff-filter=d v12.1.14..v12.1.14-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
+    && git diff --diff-filter=d v12.1.0..v12.1.0-zh -- . ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # Patching ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # Copy assets files ..." \
-    && git checkout v12.1.14-zh \
+    && git checkout v12.1.0-zh \
     && cp -R locale ${GITLAB_DIR}/ \
     && mkdir -p ${GITLAB_DIR}/app \
     && cp -R app/assets ${GITLAB_DIR}/app/ \
@@ -78,7 +75,7 @@ RUN set -xe \
 ######################
 #  Production Stage  #
 ######################
-FROM gitlab/gitlab-ce:12.1.14-ce.0 as production
+FROM gitlab/gitlab-ce:12.1.0-ce.0 as production
 
 RUN set -xe \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -90,11 +87,11 @@ RUN set -xe \
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 ENV TZ=Asia/Shanghai
 
-ENV GITLAB_VERSION=v12.1.14
+ENV GITLAB_VERSION=v12.1.0
 ENV GITLAB_DIR=/opt/gitlab/embedded/service/gitlab-rails
-ENV GITLAB_GIT_ZH=https://gitee.com/webboyvc/gitlab.git
-ENV GITLAB_GIT_COMMIT_UPSTREAM=v12.1.14
-ENV GITLAB_GIT_COMMIT_ZH=v12.1.14-zh
+ENV GITLAB_GIT_ZH=https://gitlab.com/caeret/gitlab-ce.git
+ENV GITLAB_GIT_COMMIT_UPSTREAM=v12.1.0
+ENV GITLAB_GIT_COMMIT_ZH=v12.1.0-zh
 
 COPY --from=builder ${GITLAB_DIR}/app                   ${GITLAB_DIR}/app
 COPY --from=builder ${GITLAB_DIR}/public                ${GITLAB_DIR}/public
