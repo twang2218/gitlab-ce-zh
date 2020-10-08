@@ -23,5 +23,5 @@ ENV GITLAB_GIT_COMMIT_UPSTREAM=v12.3.5
 ENV GITLAB_GIT_COMMIT_ZH=v12.3.5-zh
 
 RUN yes|cp -ar /tmp/gitlab-v12.3.5-zh/* ${GITLAB_DIR}/ \
-   && rm -rf /tmp/gitlab-v12.3.5-zh.tar.gz \
+    && rm -rf /tmp/gitlab-v12.3.5-zh.tar.gz \
              /tmp/gitlab-v12.3.5-zh/ 
