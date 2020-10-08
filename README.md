@@ -1,3 +1,4 @@
+# twang2218的镜像不再更新，继续更新他的镜像，新版本12.2以后采用直接替换文件的方式进行汉化（无编译过程），最新版本支持到12.3.5
 # 支持的 tags 和对应的 `Dockerfile`
 
 - [`9.2`, `9.2.10` (*9.2/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/9.2/Dockerfile)
@@ -21,7 +22,7 @@
 这是汉化的 GitLab 社区版 Docker Image [twang2218/gitlab-ce-zh](https://hub.docker.com/r/twang2218/gitlab-ce-zh/)，基于官方提供的 Docker Image  [gitlab/gitlab-ce](https://hub.docker.com/r/gitlab/gitlab-ce/)，以及 Larry Li 的汉化 <https://gitlab.com/larryli/gitlab> (8.9以前的版本) 和谢航的汉化 <https://gitlab.com/xhang/gitlab> (8.9 以后的版本) 而制作。
 
 * 如果碰到汉化问题，欢迎到 <https://gitlab.com/xhang/gitlab/issues> 来提交 Issue 甚至 Merge Request；
-* 如果碰到镜像问题，欢迎到 <https://github.com/twang2218/gitlab-ce-zh/issues> 来提交 Issue 或 Pull Request。
+* 如果碰到镜像问题，欢迎到 <https://github.com/blueapple168/gitlab-ce-zh/issues> 来提交 Issue 或 Pull Request。
 
 大家的贡献才能让汉化项目变得更好。如果喜欢本项目，不要忘了加星标啊。 ☺
 
@@ -32,7 +33,7 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 blueapple/gitlab-ce-zh:12.1.0
+docker run -d -p 3000:80 blueapple/gitlab-ce-zh:12.3.5
 ```
 
 *可以将 `10.0.3` 换成你所需要的版本标签。*
@@ -55,7 +56,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'blueapple/gitlab-ce-zh:12.1.0'
+      image: 'blueapple/gitlab-ce-zh:12.3.5'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -128,7 +129,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    blueapple/gitlab-ce-zh:12.1.0
+    blueapple/gitlab-ce-zh:12.3.5
 ```
 
 如果需要进入容器修改配置文件，可以用 `docker exec` 命令进入容器：
