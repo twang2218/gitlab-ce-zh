@@ -10,8 +10,7 @@ RUN set -xe \
     && locale-gen en_US.UTF-8 \
     && rm -rf /var/lib/apt/lists/* \
     && wget -c -O /tmp/gitlab-v12.3.5-zh.tar.gz https://gitlab.com/xhang/gitlab/-/archive/v12.3.5-zh/gitlab-v12.3.5-zh.tar.gz \
-    && cd /tmp \
-    && tar xf gitlab-v12.3.5-zh.tar.gz
+    && tar xf /tmp/gitlab-v12.3.5-zh.tar.gz
 
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 ENV TZ=Asia/Shanghai
