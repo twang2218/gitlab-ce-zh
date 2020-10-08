@@ -24,4 +24,6 @@ RUN set -xe \
     && cd /tmp \
     && tar xf gitlab-${GITLAB_VERSION}-zh.tar.gz
 
-RUN yes|cp -ar /tmp/gitlab-${GITLAB_VERSION}-zh/* ${GITLAB_DIR}/
+RUN yes|cp -ar /tmp/gitlab-${GITLAB_VERSION}-zh/* ${GITLAB_DIR}/ \
+    && rm -rf /tmp/gitlab-${GITLAB_VERSION}-zh.tar.gz \
+              /tmp/gitlab-${GITLAB_VERSION}-zh/
