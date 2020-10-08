@@ -8,6 +8,7 @@
 - [`11.1`, `11.1.4` (*11.1/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.1/Dockerfile)
 - [`11.11`, `11.11.8` (*11.11/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/11.11/Dockerfile)
 - [`12.0`, `12.0.9` (*12.0/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/12.0/Dockerfile)
+- [`12.1`, `12.1.0` (*12.1/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/12.1/Dockerfile)
 - [`12.3`, `12.3.5` (*12.3/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/12.3/Dockerfile)
 - [`testing` (*testing/Dockerfile*)](https://github.com/blueapple168/gitlab-ce-zh/blob/master/testing/Dockerfile)
 
@@ -31,7 +32,7 @@
 如果想简单的运行一下看看，可以执行这个命令：
 
 ```bash
-docker run -d -p 3000:80 blueapple/gitlab-ce-zh:12.3.5
+docker run -d -p 3000:80 blueapple/gitlab-ce-zh:12.1.0
 ```
 
 *可以将 `10.0.3` 换成你所需要的版本标签。*
@@ -54,7 +55,7 @@ docker rm -fv <容器ID>
 version: '2'
 services:
     gitlab:
-      image: 'blueapple/gitlab-ce-zh:12.3.5'
+      image: 'blueapple/gitlab-ce-zh:12.1.0'
       restart: unless-stopped
       hostname: 'gitlab.example.com'
       environment:
@@ -127,7 +128,7 @@ docker run -d \
     -v gitlab-logs:/var/log/gitlab \
     -v gitlab-data:/var/opt/gitlab \
     --network gitlab-net \
-    blueapple/gitlab-ce-zh:12.3.5
+    blueapple/gitlab-ce-zh:12.1.0
 ```
 
 如果需要进入容器修改配置文件，可以用 `docker exec` 命令进入容器：
